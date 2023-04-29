@@ -15,9 +15,9 @@ class SubcategoriesController {
     )
       return next(ApiError.badRequest("Incorrect name or img or idCategory"));
 
-    const query = `INSERT INTO subcategories(idCategory, nameSubcategories, imgSubcategories) VALUES (${idCategory}, '${nameSubcategories}', '${imgSubcategories}')`;
+    const query = `INSERT INTO subcategories(idCategory, nameSubcategories, imgSubcategories) VALUES (?, '?', '?')`;
 
-    await db.query(query, (err, data) => {
+    await db.query(query, [idCategory, nameSubcategories, imgSubcategories], (err, data) => {
       if (err) return res.json(err);
       else return res.json({ message: "Successful" });
     });

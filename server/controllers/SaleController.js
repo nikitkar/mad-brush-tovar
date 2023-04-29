@@ -31,14 +31,16 @@ class SaleControlles {
         )
       );
 
-    //   const dataSale = new Date();
+    const query = `INSERT INTO sale(idClient, idProduct, dataSale, priceSale, countSale, numberSale) VALUES (?, ?, '?', ?, ?, ?)`;
 
-    const query = `INSERT INTO sale(idClient, idProduct, dataSale, priceSale, countSale, numberSale) VALUES (${idClient}, ${idProduct}, '${dataSale}', ${priceSale}, ${countSale}, ${numberSale})`;
-
-    await db.query(query, (err, data) => {
-      if (err) return res.json(err);
-      else return res.json({ message: "Successful" });
-    });
+    await db.query(
+      query,
+      [idClient, idProduct, priceSale, countSale, numberSale, dataSale],
+      (err, data) => {
+        if (err) return res.json(err);
+        else return res.json({ message: "Successful" });
+      }
+    );
   }
 
   async getNumberSale(req, res) {

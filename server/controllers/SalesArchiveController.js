@@ -5,39 +5,32 @@ import { db } from "../MySQL.js";
 class SalesArchiveController {
   async create(req, res, next) {
     const {
-      idSuppliers,
-      idPointIssue,
-      priceInvoice,
-      dateDeliveryInvoice = Date.now(),
-      countInvoice,
+      idSale,
+      statusSalesArchive
     } = req.body;
 
     if (
-      !idSuppliers ||
-      idSuppliers == "" ||
-      !idPointIssue ||
-      idPointIssue == "" ||
-      !priceInvoice ||
-      priceInvoice == "" ||
-      !countInvoice ||
-      countInvoice == ""
+      !idSale ||
+      idSale == "" ||
+      !statusSalesArchive ||
+      statusSalesArchive == ""
     )
       return next(
         ApiError.badRequest(
-          "Incorrect idSuppliers oridPointIssue or priceInvoice or countInvoice"
+          "Incorrect idSale or statusSalesArchive"
         )
       );
 
-    const query = `INSERT INTO invoice(idSuppliers, idPointIssue, priceInvoice, 1, countInvoice) VALUES (${idSuppliers}, ${idPointIssue}, ${priceInvoice}, '${dateDeliveryInvoice}', ${countInvoice})`;
+    const query = `INSERT INTO salesArchive(idSale, statusSalesArchive) VALUES (?, '?')`;
 
-    await db.query(query, (err, data) => {
+    await db.query(query, [idSale, statusSalesArchive], (err, data) => {
       if (err) return res.json(err);
       else return res.json({ message: "Successful" });
     });
   }
 
   async getAll(req, res) {
-    const query = "SELECT * FROM invoice";
+    const query = "SELECT * FROM salesArchive";
 
     await db.query(query, (err, data) => {
       if (err) return res.json(err);

@@ -9,9 +9,9 @@ class PointIssueController {
     if (!address || address == "" || !workingTime || workingTime == "")
       return next(ApiError.badRequest("Incorrect address or workingTime"));
 
-    const query = `INSERT INTO pointIssue(addressPointIssue, workingHousePointIssue) VALUES ('${address}', ${workingTime})`;
+    const query = `INSERT INTO pointIssue(addressPointIssue, workingHousePointIssue) VALUES ('?', ?)`;
 
-    await db.query(query, (err, data) => {
+    await db.query(query, [address, workingTime], (err, data) => {
       if (err) return res.json(err);
       else return res.json({ message: "Successful" });
     });

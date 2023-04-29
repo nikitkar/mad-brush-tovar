@@ -11,9 +11,9 @@ class CategoryController {
     if (!name || (name == "" && !imgCategory) || imgCategory == "")
       return next(ApiError.badRequest("Incorrect name or img"));
 
-    const query = `INSERT INTO category(nameCategory, imgCategory) VALUES ('${name}', ${imgCategory})`;
+    const query = `INSERT INTO category(nameCategory, imgCategory) VALUES ('?', ?)`;
 
-    await db.query(query, (err, data) => {
+    await db.query(query, [name, imgCategory], (err, data) => {
       if (err) return res.json(err);
       else return res.json({ message: "Successful" });
     });

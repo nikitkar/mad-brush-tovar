@@ -22,12 +22,16 @@ class ProductWaybillController {
         )
       );
 
-    const query = `INSERT INTO productWaybill(idInvice, idCategory, nameProduct, countProducts) VALUES (${idInvice}, ${idCategory}, '${nameProduct}', ${countProducts})`;
+    const query = `INSERT INTO productWaybill(idInvice, idCategory, nameProduct, countProducts) VALUES (?, ?, '?', ?)`;
 
-    await db.query(query, (err, data) => {
-      if (err) return res.json(err);
-      else return res.json({ message: "Successful" });
-    });
+    await db.query(
+      query,
+      [idInvice, idCategory, nameProduct, countProducts],
+      (err, data) => {
+        if (err) return res.json(err);
+        else return res.json({ message: "Successful" });
+      }
+    );
   }
 
   async getAll(req, res) {

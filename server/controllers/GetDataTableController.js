@@ -8,9 +8,9 @@ class GetDataTableController {
 
     if (!name || name == "") return next(ApiError.badRequest("Incorrect name"));
 
-    const query = `SELECT * FROM ${name}`;
+    const query = `SELECT * FROM ?`;
 
-    await db.query(query, (err, data) => {
+    await db.query(query, name, (err, data) => {
       if (err) return res.json(err);
       else return res.json(data);
     });
@@ -31,12 +31,16 @@ class GetDataTableController {
         ApiError.badRequest("Incorrect id or nameTable or nameColumn")
       );
 
-    const query = `DELETE FROM ${nameTable} WHERE ${nameTable}.${nameColumn}=${id}`;
+    const query = `DELETE FROM ? WHERE ?.?=?`;
 
-    await db.query(query, (err, data) => {
-      if (err) return res.json(err);
-      else return res.json(data);
-    });
+    await db.query(
+      query,
+      [nameTable, nameTable, nameColumn, id],
+      (err, data) => {
+        if (err) return res.json(err);
+        else return res.json(data);
+      }
+    );
   }
 
   async searchData(req, res, next) {
@@ -47,9 +51,9 @@ class GetDataTableController {
         ApiError.badRequest("Incorrect content or nameTable or nameColumn")
       );
 
-    const query = `SELECT * FROM ${nameTable} WHERE ${nameColumn} LIKE '%${content}%'`;
+    const query = `SELECT * FROM ? WHERE ? LIKE '%?%'`;
 
-    await db.query(query, (err, data) => {
+    await db.query(query, [nameTable, nameColumn, content], (err, data) => {
       if (err) return res.json(err);
       else return res.json(data);
     });
@@ -71,12 +75,16 @@ class GetDataTableController {
           ApiError.badRequest("Incorrect nameTable or nameTable or methodSort")
         );
 
-      const query = `SELECT * FROM ${nameTable} ORDER BY ${nameColumn} ${methodSort}`;
+      const query = `SELECT * FROM ? ORDER BY ? ?`;
 
-      await db.query(query, (err, data) => {
-        if (err) return res.json(err);
-        else return res.json(data);
-      });
+      await db.query(
+        query,
+        [nameTable, nameColumn, methodSort],
+        (err, data) => {
+          if (err) return res.json(err);
+          else return res.json(data);
+        }
+      );
     } catch (e) {
       next(ApiError.badRequest(e.message));
     }
@@ -111,12 +119,16 @@ class GetDataTableController {
         );
 
       const query = `
-      SELECT * FROM ${nameTable} WHERE ${nameColumnSeacrh} LIKE '%${content}%' ORDER BY ${nameColumnSort} ${methodSort}`;
+      SELECT * FROM ? WHERE ? LIKE '%?%' ORDER BY ? ?`;
 
-      await db.query(query, (err, data) => {
-        if (err) return res.json(err);
-        else return res.json(data);
-      });
+      await db.query(
+        query,
+        [nameTable, nameColumnSeacrh, content, nameColumnSort, methodSort],
+        (err, data) => {
+          if (err) return res.json(err);
+          else return res.json(data);
+        }
+      );
     } catch (e) {
       next(ApiError.badRequest(e.message));
     }
@@ -131,10 +143,10 @@ class GetDataTableController {
 
       const query =
         nameColumn === "percentPromotionsUsers"
-          ? `SELECT client.idClient, client.nameClient, client.emailClient, client.telephoneClient, client.addressClient, promotionsUsers.percentPromotionsUsers FROM client, promotionsUsers WHERE client.idClient = promotionsUsers.idClient ORDER BY promotionsUsers.${nameColumn} ${sortParam}`
-          : `SELECT client.idClient, client.nameClient, client.emailClient, client.telephoneClient, client.addressClient, promotionsUsers.percentPromotionsUsers FROM client, promotionsUsers WHERE client.idClient = promotionsUsers.idClient ORDER BY client.${nameColumn} ${sortParam}`;
+          ? `SELECT client.idClient, client.nameClient, client.emailClient, client.telephoneClient, client.addressClient, promotionsUsers.percentPromotionsUsers FROM client, promotionsUsers WHERE client.idClient = promotionsUsers.idClient ORDER BY promotionsUsers.? ?`
+          : `SELECT client.idClient, client.nameClient, client.emailClient, client.telephoneClient, client.addressClient, promotionsUsers.percentPromotionsUsers FROM client, promotionsUsers WHERE client.idClient = promotionsUsers.idClient ORDER BY client.? ?`;
 
-      await db.query(query, (err, data) => {
+      await db.query(query, [nameColumn, sortParam], (err, data) => {
         if (err) return res.json(err);
         else return res.json(data);
       });
@@ -165,20 +177,24 @@ class GetDataTableController {
           ? `SELECT client.idClient, client.nameClient, client.emailClient, client.telephoneClient, client.addressClient, promotionsUsers.percentPromotionsUsers
           FROM client, promotionsUsers
           WHERE client.idClient = promotionsUsers.idClient 
-          AND promotionsUsers.${columnNameSearch} 
-          LIKE '%${content}%' 
-          ORDER BY ${columnNameSort} ${sortParam}`
+          AND promotionsUsers.? 
+          LIKE '%?%' 
+          ORDER BY ? ?`
           : `SELECT client.idClient, client.nameClient, client.emailClient, client.telephoneClient, client.addressClient, promotionsUsers.percentPromotionsUsers
           FROM client, promotionsUsers
           WHERE client.idClient = promotionsUsers.idClient 
-          AND client.${columnNameSearch} 
-          LIKE '%${content}%' 
-          ORDER BY ${columnNameSort} ${sortParam}`;
+          AND client.? 
+          LIKE '%?%' 
+          ORDER BY ? ?`;
 
-      await db.query(query, (err, data) => {
-        if (err) return res.json(err);
-        else return res.json(data);
-      });
+      await db.query(
+        query,
+        [columnNameSearch, content, columnNameSort, sortParam],
+        (err, data) => {
+          if (err) return res.json(err);
+          else return res.json(data);
+        }
+      );
     } catch (e) {
       next(ApiError.badRequest(e.message));
     }

@@ -28,12 +28,22 @@ class InvoiceController {
         )
       );
 
-    const query = `INSERT INTO invoice(idSuppliers, idPointIssue, priceInvoice, 1, countInvoice) VALUES (${idSuppliers}, ${idPointIssue}, ${priceInvoice}, '${dateDeliveryInvoice}', ${countInvoice})`;
+    const query = `INSERT INTO invoice(idSuppliers, idPointIssue, priceInvoice, dateDeliveryInvoice, countInvoice) VALUES (?, ?, ?, '?', ?)`;
 
-    await db.query(query, (err, data) => {
-      if (err) return res.json(err);
-      else return res.json({ message: "Successful" });
-    });
+    await db.query(
+      query,
+      [
+        idSuppliers,
+        idPointIssue,
+        priceInvoice,
+        dateDeliveryInvoice,
+        countInvoice,
+      ],
+      (err, data) => {
+        if (err) return res.json(err);
+        else return res.json({ message: "Successful" });
+      }
+    );
   }
 
   async getAll(req, res) {

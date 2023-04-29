@@ -22,7 +22,7 @@ routers.use("/user", userRouter);
 routers.use("/product", productRouter);
 routers.use("/products", productsRouter);
 routers.use("/category", categoryRouter);
-routers.use("/subcategoriesRouter", subcategoriesRouter);
+routers.use("/subcategories", subcategoriesRouter);
 routers.use("/suppliers", suppliersRouter);
 routers.use("/pointIssue", pointIssueRouter);
 routers.use("/productWaybill", productWaybillRouter);

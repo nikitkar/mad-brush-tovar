@@ -8,9 +8,9 @@ class SalesProductController {
 
     if (!name || name == "") return next(ApiError.badRequest("Incorrect name"));
 
-    const query = `INSERT INTO category(nameCategory, countAllCategory) VALUES ('${name}', ${countAll})`;
+    const query = `INSERT INTO category(nameCategory, countAllCategory) VALUES ('?', ?)`;
 
-    await db.query(query, (err, data) => {
+    await db.query(query, [name, countAll], (err, data) => {
       if (err) return res.json(err);
       else return res.json({ message: "Successful" });
     });
