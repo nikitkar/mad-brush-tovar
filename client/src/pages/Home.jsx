@@ -1,11 +1,13 @@
 import PopulatProducts from "../components/layout/PopulatProducts";
-import PopulatCategory from "../components/layout/PopularCategory";
+// import PopulatCategory from "../components/layout/PopularCategory";
 
 const Home = () => {
   return (
     <>
       <PopulatProducts />
-      <PopulatCategory />
+
+      {/* убрал блок, потому что нет подходящих изображения под категории */}
+      {/* <PopulatCategory /> */}
     </>
   );
 };

@@ -50,33 +50,35 @@ const CheckoutAside = observer((props) => {
       </div>
 
       <div className="checkout-order">
-        <div className="checkout-order-item">
+        {/* <div className="checkout-order-item">
           <p className="checkout-order__title">Стоимость товаров</p>
           <p className="checkout-order__price">
             {Number(basket.totalCost).toFixed(2)}
           </p>
-        </div>
-        <div className="checkout-order-item">
+        </div> */}
+        {/* <div className="checkout-order-item">
           <p className="checkout-order__title">
             Стоимость товаров с учетом скидки
           </p>
           <p className="checkout-order-price">
             {listPromotionsUsers.percentPromotionsUsers}%
           </p>
-        </div>
+        </div> */}
         <div className="checkout-order-item">
           <p className="checkout-order__title">Итого к оплате</p>
           <p className="checkout-order__price">
-            {Number(
+            {Number(basket.totalCost).toFixed(2)}
+            {/* {Number(
               basket.totalCost -
                 basket.totalCost *
                   (listPromotionsUsers.percentPromotionsUsers / 100)
-            ).toFixed(2)}
+            ).toFixed(2)} */}
           </p>
         </div>
         <button
           className="checkout-order-button btn-text"
-          onClick={() => props.click()}>
+          onClick={() => props.click()}
+        >
           Оформить заказ
         </button>
       </div>

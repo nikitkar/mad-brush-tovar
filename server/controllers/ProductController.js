@@ -88,7 +88,7 @@ class ProductController {
         products = await new Promise((resolve) => {
           db.query(
             productCategoryQuery,
-            [idCategory, limit, offset],
+            [Number(idCategory), Number(limit), Number(offset)],
             (err, data) => {
               if (err) return res.json(err);
               else return resolve(data);
@@ -98,10 +98,10 @@ class ProductController {
       }
 
       if (!idCategory) {
-        const productAllQuery = `SELECT * FROM product LIMIT ${limit} OFFSET ${offset}`;
+        const productAllQuery = `SELECT * FROM product LIMIT ? OFFSET ?`;
 
         products = await new Promise((resolve) => {
-          db.query(productAllQuery, (err, data) => {
+          db.query(productAllQuery, [limit, offset], (err, data) => {
             if (err) return res.json(err);
             else return resolve(data);
           });

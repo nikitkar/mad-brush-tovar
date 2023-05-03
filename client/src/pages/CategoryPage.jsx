@@ -64,7 +64,8 @@ const CategoryPage = observer(() => {
                   onClick={() => {
                     categoriesByProducts.setFilter("popularity");
                     categoriesByProducts.filterEvent();
-                  }}>
+                  }}
+                >
                   <p className="sorted-item__title">По популярности</p>
                 </div>
                 <div
@@ -76,7 +77,8 @@ const CategoryPage = observer(() => {
                   onClick={() => {
                     categoriesByProducts.setFilter("novelty");
                     categoriesByProducts.filterEvent();
-                  }}>
+                  }}
+                >
                   <p className="sorted-item__title">По новизне</p>
                 </div>
                 <div
@@ -88,7 +90,8 @@ const CategoryPage = observer(() => {
                   onClick={() => {
                     categoriesByProducts.setFilter("priceCheap");
                     categoriesByProducts.filterEvent();
-                  }}>
+                  }}
+                >
                   <p className="sorted-item__title">
                     По цене (сначала дешевый)
                   </p>
@@ -102,7 +105,8 @@ const CategoryPage = observer(() => {
                   onClick={() => {
                     categoriesByProducts.setFilter("priceExpensive");
                     categoriesByProducts.filterEvent();
-                  }}>
+                  }}
+                >
                   <p className="sorted-item__title">
                     По цене (сначала дорогой)
                   </p>
@@ -134,7 +138,8 @@ const CategoryPage = observer(() => {
                         : "navigation-item"
                     }
                     key={index}
-                    onClick={() => categoriesByProducts.setPage(page)}>
+                    onClick={() => categoriesByProducts.setPage(page)}
+                  >
                     {page}
                   </div>
                 ))}

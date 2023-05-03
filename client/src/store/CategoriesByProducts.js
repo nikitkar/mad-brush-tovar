@@ -8,11 +8,13 @@ export default class CategoriesByProductsStore {
     this._limit = 12;
     this._selectedCategory = 1;
     this._filter = "popularity";
+
     makeAutoObservable(this);
   }
 
   setPages(pages) {
     this._pages = pages;
+    this.filterEvent();
   }
 
   setPage(page) {

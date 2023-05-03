@@ -9,14 +9,14 @@ import { fetchOneProduct } from "../http/ProductAPI";
 
 //обертка, для того, чтобы видеть измениня (подписка)
 const DevicePage = observer(() => {
-  const { user, listPromotionsUsers, basket } = useContext(Context);
+  const { basket } = useContext(Context);
   const [products, setProducts] = useState(null);
   const { id } = useParams();
 
   //сработает при первой загрузке страницы
   useEffect(() => {
     fetchOneProduct(id).then((data) => setProducts(data));
-  }, [id]);
+  }, [id, products]);
 
   const addItemBaskets = (idItem) => basket.addItem(idItem);
 
@@ -24,7 +24,7 @@ const DevicePage = observer(() => {
     <section className="product">
       <div className="container">
         <div className="product-wrapper">
-          <h2 className="product-title">{products?.product[0]?.nameProduct}</h2>
+          <h2 className="product-title">{products?.product?.nameProduct}</h2>
 
           <div className="product-body">
             <div className="product-img-wrap">
@@ -33,7 +33,7 @@ const DevicePage = observer(() => {
                 src={
                   process.env.REACT_APP_API_URL +
                   "/" +
-                  products?.product[0]?.imgProduct
+                  products?.product?.imgProduct
                 }
                 alt="Изображение товара"
                 width="560"
@@ -58,15 +58,15 @@ const DevicePage = observer(() => {
               <div className="product-payment">
                 <div className="product-payment__coast">
                   <p className="product-payment__price">
-                    {products?.product[0]?.priceProduct} ₽
+                    {products?.product?.priceProduct} BYN
                   </p>
-                  <p className="product-payment__status">В наличии</p>
                 </div>
                 <div className="product-payment__controls">
                   <button
                     className="product-payment__controls-button  btn-icon"
                     type="button"
-                    onClick={() => addItemBaskets(id)}>
+                    onClick={() => addItemBaskets(id)}
+                  >
                     <span className="product-payment__controls_btn-icon  btn-icon_icon">
                       <img
                         className="product-payment__controls_btn-icon_img  btn-icon_icon-img"
@@ -79,18 +79,20 @@ const DevicePage = observer(() => {
                     </span>
                   </button>
                 </div>
-                <div className="product-payment__bonus">
+
+                {/* блок с персональной скидкой */}
+                {/* <div className="product-payment__bonus">
                   {user.isAuth === true ? (
                     <p className="product-payment__bonus-persent">
                       {user.id === -1
                         ? null
-                        : products?.product[0]?.priceProduct -
-                          products?.product[0]?.priceProduct *
+                        : products?.product?.priceProduct -
+                          products?.product?.priceProduct *
                             (listPromotionsUsers.percentPromotionsUsers / 100) +
                           "₽ - цена со скидкой"}
                     </p>
                   ) : null}
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

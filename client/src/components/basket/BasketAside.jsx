@@ -17,21 +17,22 @@ const BasketAside = observer(() => {
           {Number(basket.totalCost).toFixed(2)}
         </span>
       </div>
-      <div className="basket-aside-wrap">
+      {/* <div className="basket-aside-wrap">
         <p className="basket-aside-text">Персональная скидка</p>
         <span className="basket-aside-price">
           {listPromotionsUsers.percentPromotionsUsers}%
         </span>
-      </div>
+      </div> */}
 
       <div className="basket-aside-total basket-aside-wrap">
         <p className="basket-aside-total__text">Итого</p>
         <span className="basket-aside-total__price">
-          {Number(
+          {Number(basket.totalCost).toFixed(2)}
+          {/* {Number(
             basket.totalCost -
               basket.totalCost *
                 (listPromotionsUsers.percentPromotionsUsers / 100)
-          ).toFixed(2)}
+          ).toFixed(2)} */}
         </span>
       </div>
 

@@ -13,6 +13,7 @@ import { fetchPromotionsUsers } from "./http/PromotionsUsersAPI";
 import { fetchPointIssue } from "./http/PointIssueAPI";
 
 import "./assets/sass/app.scss";
+
 const App = observer(() => {
   const { user, listPromotionsUsers, basket, listPointIssue } =
     useContext(Context);

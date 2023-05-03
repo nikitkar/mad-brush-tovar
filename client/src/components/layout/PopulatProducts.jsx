@@ -33,7 +33,7 @@ const PopulatProducts = observer(() => {
                   title={product.nameProduct}
                   price={product.priceProduct}
                   id={product.idProduct}
-                  discount={product.priceProduct}
+                //   discount={product.priceProduct}
                 />
               </SwiperSlide>
             ))}

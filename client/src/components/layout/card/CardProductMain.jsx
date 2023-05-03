@@ -32,8 +32,8 @@ const CardProduct = (props) => {
 
         <div className="hits-item__footer">
           <div className="hits-item__cost">
-            <p className="hits-item__price">{props.price} ₽</p>
-            <p className="hits-item__discount">{props.discount} ₽</p>
+            <p className="hits-item__price">{props.price} BYN</p>
+            {/* <p className="hits-item__discount">{props.discount} ₽</p> */}
           </div>
 
           <button
