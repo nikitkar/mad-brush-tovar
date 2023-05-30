@@ -14,7 +14,7 @@ import {
 import HeaderBottomNav from "./Header_BottomNav";
 import HeaderCatalogShow from "./headerCatalog/Header_CatalogShow";
 
-import logoIcon from "../../../assets/images/logo/logo.svg";
+import logoIcon from "../../../assets/images/logo/logo.webp";
 import userAvatar from "../../../assets/images/icon/userAvatar.svg";
 import basketIcon from "../../../assets/images/icon/basket.svg";
 
@@ -43,6 +43,7 @@ const Header = observer(() => {
                 src={logoIcon}
                 alt="Логотип компании"
               />
+              MADBRUSH
             </Link>
 
             <div className="header-top_right">
@@ -60,7 +61,8 @@ const Header = observer(() => {
                   <button
                     className="admin-link"
                     type="button"
-                    onClick={() => navigate(ADMIN_ROUTE)}>
+                    onClick={() => navigate(ADMIN_ROUTE)}
+                  >
                     Админ панель
                   </button>
                 </div>
@@ -68,9 +70,8 @@ const Header = observer(() => {
 
               <button
                 className="profile"
-                onClick={() =>
-                  user.isAuth ? logOut() : navigate(LOGIN_ROUTE)
-                }>
+                onClick={() => (user.isAuth ? logOut() : navigate(LOGIN_ROUTE))}
+              >
                 <span className="profile-text">
                   {user.isAuth ? "выйти" : "войти"}
                 </span>
@@ -90,7 +91,8 @@ const Header = observer(() => {
             <div className="header-nav_bar">
               <div
                 className="header-nav_bar-item  basketIcon"
-                onClick={() => navigate(CART_ROUTER)}>
+                onClick={() => navigate(CART_ROUTER)}
+              >
                 <img
                   className="basketIcon-img"
                   src={basketIcon}

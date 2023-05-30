@@ -1,3 +1,54 @@
+export const ALLS_NAMECOLUMNE = {
+  CREDENTIALS_NAMECOLUMNE: [
+    "idCredentials",
+    "idClient",
+    "loginClient",
+    "passwordClient",
+    "roleClient",
+  ],
+  SALE_NAMECOLUMNE: [
+    "idSale",
+    "idClient",
+    "idProduct",
+    "dataSale",
+    "priceSale",
+    "numberSale",
+  ],
+  SALESARCHIVE_NAMECOLUMNE: ["idSalesArchive", "idSale", "statusSalesArchive"],
+  PRODUCT_NAMECOLUMNE: [
+    "idProduct",
+    "idCategory",
+    "nameProduct",
+    "priceProduct",
+    "imgProduct",
+  ],
+  PRODUCTINFO_NAMECOLUMNE: [
+    "idProductInfo",
+    "idProduct",
+    "descriptionProduct",
+  ],
+  CATEGORY_NAMECOLUMNE: ["idCategory", "nameCategory", "imgCategory"],
+  POINTISSUE_NAMECOLUMNE: [
+    "idPointIssue",
+    "addressPointIssue",
+    "workingHousePointIssue",
+  ],
+  SUPPLIERS_NAMECOLUMNE: ["idSuppliers", "nameSuppliers"],
+  INVOICE_NAMECOLUMNE: [
+    "idInvoice",
+    "idSuppliers",
+    "idPointIssue",
+    "dateDeliveryInvoice",
+    "countInvoice",
+    "priceInvoice",
+  ],
+  PRODUCTWAYBILL_NAMECOLUMNE: [
+    "idProductWaybill",
+    "idInvoice",
+    "idProduct",
+    "countProduct_waybill",
+  ],
+};
 export const CLIENT_NAMECOLUMNE = [
   "idClient",
   "nameClient",
@@ -65,18 +116,4 @@ export const PRODUCTWAYBILL_NAMECOLUMNE = [
   "idInvoice",
   "idProduct",
   "countProduct_waybill",
-];
-
-export const ALL_NAMECOLIMNE = [
-  "CLIENT_NAMECOLUMNE",
-  "CREDENTIALS_NAMECOLUMNE",
-  "SALE_NAMECOLUMNE",
-  "SALESARCHIVE_NAMECOLUMNE",
-  "PRODUCT_NAMECOLUMNE",
-  "PRODUCTINFO_NAMECOLUMNE",
-  "CATEGORY_NAMECOLUMNE",
-  "POINTISSUE_NAMECOLUMNE",
-  "SUPPLIERS_NAMECOLUMNE",
-  "INVOICE_NAMECOLUMNE",
-  "PRODUCTWAYBILL_NAMECOLUMNE",
 ];

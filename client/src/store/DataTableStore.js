@@ -62,7 +62,7 @@ export default class DataTableStore {
         ? sortData(nameSort, item, this._sortMethod).then((data) => {
             if (data.err || data.sqlMessage)
               return alert(data.err || data.sqlMessage);
-            else saveDateResult(data);
+            else saveDateResult(data); // не видит что-то в функции, думаю нет привязки к this или что-то такого
           })
         : null
     );
@@ -121,25 +121,35 @@ export default class DataTableStore {
         return null;
       }
       case "CREDENTIALS_NAMECOLUMNE": {
-        if (this._valueSearchData === "" || this._selectOption === "")
+        if (this._valueSearchData === "" || this._selectOption === "") {
           this.refreshDontParams(
             CREDENTIALS_NAMECOLUMNE,
             "credentials",
-            this.setDataCredentials
+            this.setDataCredentials.bind(this)
           );
-        else
+        } else {
           this.refreshWithParams(
             CREDENTIALS_NAMECOLUMNE,
             "credentials",
-            this.setDataCredentials
+            this.setDataCredentials.bind(this)
           );
+        }
 
         return null;
       }
       case "SALE_NAMECOLUMNE": {
         if (this._valueSearchData === "" || this._selectOption === "")
-          this.refreshDontParams(SALE_NAMECOLUMNE, "sale", this.setDataSale);
-        else this.refreshWithParams(SALE_NAMECOLUMNE, "sale", this.setDataSale);
+          this.refreshDontParams(
+            SALE_NAMECOLUMNE,
+            "sale",
+            this.setDataSale.bind(this)
+          );
+        else
+          this.refreshWithParams(
+            SALE_NAMECOLUMNE,
+            "sale",
+            this.setDataSale.bind(this)
+          );
 
         return null;
       }
@@ -148,13 +158,13 @@ export default class DataTableStore {
           this.refreshDontParams(
             SALESARCHIVE_NAMECOLUMNE,
             "salesarchive",
-            this.setDataSalesArchive
+            this.setDataSalesArchive.bind(this)
           );
         else
           this.refreshWithParams(
             SALESARCHIVE_NAMECOLUMNE,
             "salesarchive",
-            this.setDataSalesArchive
+            this.setDataSalesArchive.bind(this)
           );
 
         return null;
@@ -164,13 +174,13 @@ export default class DataTableStore {
           this.refreshDontParams(
             PRODUCT_NAMECOLUMNE,
             "product",
-            this.setDataProduct
+            this.setDataProduct.bind(this)
           );
         else
           this.refreshWithParams(
             PRODUCT_NAMECOLUMNE,
             "product",
-            this.setDataProduct
+            this.setDataProduct.bind(this)
           );
 
         return null;
@@ -180,13 +190,13 @@ export default class DataTableStore {
           this.refreshDontParams(
             PRODUCTINFO_NAMECOLUMNE,
             "product_info",
-            this.setDataProductInfo
+            this.setDataProductInfo.bind(this)
           );
         else
           this.refreshWithParams(
             PRODUCTINFO_NAMECOLUMNE,
             "product_info",
-            this.setDataProductInfo
+            this.setDataProductInfo.bind(this)
           );
 
         return null;
@@ -196,13 +206,13 @@ export default class DataTableStore {
           this.refreshDontParams(
             CATEGORY_NAMECOLUMNE,
             "category",
-            this.setDataCategory
+            this.setDataCategory.bind(this)
           );
         else
           this.refreshWithParams(
             CATEGORY_NAMECOLUMNE,
             "category",
-            this.setDataCategory
+            this.setDataCategory.bind(this)
           );
 
         return null;
@@ -212,13 +222,13 @@ export default class DataTableStore {
           this.refreshDontParams(
             POINTISSUE_NAMECOLUMNE,
             "pointIssue",
-            this.setDataPointIssue
+            this.setDataPointIssue.bind(this)
           );
         else
           this.refreshWithParams(
             POINTISSUE_NAMECOLUMNE,
             "pointIssue",
-            this.setDataPointIssue
+            this.setDataPointIssue.bind(this)
           );
 
         return null;
@@ -228,13 +238,13 @@ export default class DataTableStore {
           this.refreshDontParams(
             SUPPLIERS_NAMECOLUMNE,
             "suppliers",
-            this.setDataSuppliers
+            this.setDataSuppliers.bind(this)
           );
         else
           this.refreshWithParams(
             SUPPLIERS_NAMECOLUMNE,
             "suppliers",
-            this.setDataSuppliers
+            this.setDataSuppliers.bind(this)
           );
 
         return null;
@@ -244,13 +254,13 @@ export default class DataTableStore {
           this.refreshDontParams(
             INVOICE_NAMECOLUMNE,
             "invoice",
-            this.setDataInvoice
+            this.setDataInvoice.bind(this)
           );
         else
           this.refreshWithParams(
             INVOICE_NAMECOLUMNE,
             "invoice",
-            this.setDataInvoice
+            this.setDataInvoice.bind(this)
           );
 
         return null;
@@ -260,13 +270,13 @@ export default class DataTableStore {
           this.refreshDontParams(
             PRODUCTWAYBILL_NAMECOLUMNE,
             "productWaybill",
-            this.setDataProductWaybill
+            this.setDataProductWaybill.bind(this)
           );
         else
           this.refreshWithParams(
             PRODUCTWAYBILL_NAMECOLUMNE,
             "productWaybill",
-            this.setDataProductWaybill
+            this.setDataProductWaybill.bind(this)
           );
 
         return null;
@@ -284,7 +294,7 @@ export default class DataTableStore {
 
     this.setSortColumnIndex(index);
 
-    this.refresh();
+    // this.refresh();
   }
 
   // выбрать одну строку
@@ -443,7 +453,7 @@ export default class DataTableStore {
           this.auxiliary_searchData_change(
             "credentials",
             "idCredentials",
-            this.setDataCredentials
+            this.setDataCredentials.bind(this)
           );
         }, 600);
 
@@ -453,7 +463,11 @@ export default class DataTableStore {
         this.setValueSearchData(values);
 
         setTimeout(() => {
-          this.auxiliary_searchData_change("sale", "idSale", this.setDataSale);
+          this.auxiliary_searchData_change(
+            "sale",
+            "idSale",
+            this.setDataSale.bind(this)
+          );
         }, 600);
 
         return null;
@@ -465,7 +479,7 @@ export default class DataTableStore {
           this.auxiliary_searchData_change(
             "salesArchive",
             "idSalesArchive",
-            this.setDataSalesArchive
+            this.setDataSalesArchive.bind(this)
           );
         }, 600);
 
@@ -478,7 +492,7 @@ export default class DataTableStore {
           this.auxiliary_searchData_change(
             "product",
             "idProduct",
-            this.setDataProduct
+            this.setDataProduct.bind(this)
           );
         }, 600);
 
@@ -491,7 +505,7 @@ export default class DataTableStore {
           this.auxiliary_searchData_change(
             "product_info",
             "idProductInfo",
-            this.setDataProductInfo
+            this.setDataProductInfo.bind(this)
           );
         }, 600);
 
@@ -504,7 +518,7 @@ export default class DataTableStore {
           this.auxiliary_searchData_change(
             "category",
             "idCategory",
-            this.setDataCategory
+            this.setDataCategory.bind(this)
           );
         }, 600);
 
@@ -517,7 +531,7 @@ export default class DataTableStore {
           this.auxiliary_searchData_change(
             "pointIssue",
             "idPointIssue",
-            this.setDataPointIssue
+            this.setDataPointIssue.bind(this)
           );
         }, 600);
 
@@ -530,7 +544,7 @@ export default class DataTableStore {
           this.auxiliary_searchData_change(
             "suppliers",
             "idSuppliers",
-            this.setDataSuppliers
+            this.setDataSuppliers.bind(this)
           );
         }, 600);
 
@@ -543,7 +557,7 @@ export default class DataTableStore {
           this.auxiliary_searchData_change(
             "invoice",
             "idInvoice",
-            this.setDataInvoice
+            this.setDataInvoice.bind(this)
           );
         }, 600);
 
@@ -556,7 +570,7 @@ export default class DataTableStore {
           this.auxiliary_searchData_change(
             "productWaybill",
             "idProductWaybill",
-            this.setDataProductWaybill
+            this.setDataProductWaybill.bind(this)
           );
         }, 600);
 
@@ -605,7 +619,6 @@ export default class DataTableStore {
       case "PRODUCT_NAMECOLUMNE":
         this._selectedInputs.map((selectedInput) =>
           deletedRow(selectedInput, "product", "idProduct").then((data) => {
-            console.log(data);
             alert(data.err ? data.err : "Успешно");
           })
         );

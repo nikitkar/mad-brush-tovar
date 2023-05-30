@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 import { HOME_ROUTE } from "../../../utils/consts";
 
-import logo from "../../../assets/images/logo/logo.svg";
+import logo from "../../../assets/images/logo/logo.webp";
 import instagram from "../../../assets/images/social/instagram.svg";
 import facebook from "../../../assets/images/social/facebook.svg";
 import youtude from "../../../assets/images/social/youtude.svg";
@@ -15,6 +15,7 @@ function Footer() {
           <div className="footer-top">
             <Link className="logo" to={HOME_ROUTE}>
               <img className="logo__img" src={logo} alt="Логотип компании" />
+              MADBRUSH
             </Link>
 
             <div className="social">
@@ -50,13 +51,14 @@ function Footer() {
                 className="email"
                 target="_blank"
                 href="https://filetools7.pdf24.org/client.php?mode=inline&file=joinPdf_1e5755255b212dba280bca901d4226f0_1979954439396560612.pdf&action=getFile"
-                rel="noreferrer">
+                rel="noreferrer"
+              >
                 Руковоство пользователя
               </a>
             </div>
 
-            <a className="email" href="mailto:electrotovarBy@gmail.com">
-              electrotovarBy@gmail.com
+            <a className="email" href="mailto:madbrush@list.ru">
+              madbrush@list.ru
             </a>
           </div>
         </div>

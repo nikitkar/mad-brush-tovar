@@ -11,7 +11,6 @@ export const getDataTable = async (name) => {
 };
 
 export const deletedRow = async (id, nameTable, nameColumn) => {
-  console.log(id, nameTable, nameColumn);
   const { data } = await $authHost.get("/api/getDataTable/delete", {
     params: {
       id,
@@ -35,12 +34,12 @@ export const searchData = async (nameTable, nameColumn, content) => {
   return data;
 };
 
-export const sortData = async (nameTable, nameColumn, methodSort) => {
+export const sortData = async (nameTable, nameColumn, sortParam) => {
   const { data } = await $authHost.get("/api/getDataTable/sort", {
     params: {
-      nameTable: nameTable,
-      nameColumn: nameColumn,
-      methodSort: methodSort,
+      nameTable,
+      nameColumn,
+      sortParam,
     },
   });
 
@@ -52,7 +51,7 @@ export const sortData_search = async (
   nameColumnSeacrh,
   content,
   nameColumnSort,
-  methodSort
+  sortParam
 ) => {
   const { data } = await $authHost.get("/api/getDataTable/sort_search", {
     params: {
@@ -60,7 +59,7 @@ export const sortData_search = async (
       nameColumnSeacrh,
       content,
       nameColumnSort,
-      methodSort,
+      sortParam,
     },
   });
 

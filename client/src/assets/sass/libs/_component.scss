@@ -1,5 +1,9 @@
 .logo {
   cursor: pointer;
+  @include font(26px, 700);
+  @include displayFlex(center, flex-start);
+
+  color: $color-white;
 
   &__img {
     max-height: 80px;

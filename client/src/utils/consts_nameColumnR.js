@@ -1,3 +1,48 @@
+export const ALLS_NAMECOLUMNR = {
+  CLIENT_NAMECOLUMN: ["id", "ФИО", "Почта", "Телефон", "Адрес", "Скидка"],
+  CREDENTIALS_NAMECOLUMN: [
+    "id",
+    "id клиента",
+    "Логин",
+    "Пароль",
+    "Роль на сайте",
+  ],
+  SALE_NAMECOLUMN: [
+    "id",
+    "id клиента",
+    "id продукта",
+    "Дата оформления",
+    "Количество Товара",
+    "Итоговая цена"
+  ],
+  SALESARCHIVE_NAMECOLUMN: ["id", "id документа", "Статус"],
+  PRODUCT_NAMECOLUMN: [
+    "id",
+    "id категории",
+    "Название",
+    "Цена",
+    "Изображение товара",
+  ],
+  PRODUCTINFO_NAMECOLUMN: ["id", "id товара", "Значение"],
+  CATEGORY_NAMECOLUMN: ["id", "Название", "Изображение категории"],
+  POINTISSUE_NAMECOLUMN: ["id", "Адрес", "Время работы"],
+  SUPPLIERS_NAMECOLUMN: ["id", "Название"],
+  INVOICE_NAMECOLUMN: [
+    "id",
+    "Поставщик",
+    "Куда доставляет",
+    "Дата оформления",
+    "Количество товара",
+    "Сумма",
+  ],
+  PRODUCTWAYBILL_NAMECOLUMN: [
+    "id",
+    "id накладной",
+    "Название товара",
+    "Количество товара",
+  ],
+};
+
 export const CLIENT_NAMECOLUMNR = [
   "id",
   "ФИО",

@@ -72,23 +72,23 @@ class GetDataTableController {
 
   async sortData(req, res, next) {
     try {
-      const { nameTable, nameColumn, methodSort } = req.query;
+      const { nameTable, nameColumn, sortParam } = req.query;
 
       if (
         !nameColumn ||
         nameColumn == "" ||
         !nameTable ||
         nameTable == "" ||
-        !methodSort ||
-        methodSort == ""
+        !sortParam ||
+        sortParam == ""
       )
         return next(
-          ApiError.badRequest("Incorrect nameTable or nameTable or methodSort")
+          ApiError.badRequest("Incorrect nameTable or nameTable or sortParam")
         );
 
       const query =
         `SELECT * FROM ?? ORDER BY ?? ` +
-        (methodSort === "DESC" ? "DESC" : "ASC");
+        (sortParam === "DESC" ? "DESC" : "ASC");
 
       await db.query(query, [nameTable, nameColumn], (err, data) => {
         if (err) return res.json(err);
@@ -106,7 +106,7 @@ class GetDataTableController {
         nameColumnSeacrh,
         content,
         nameColumnSort,
-        methodSort,
+        sortParam,
       } = req.query;
 
       if (
@@ -118,19 +118,19 @@ class GetDataTableController {
         content == "" ||
         !nameColumnSort ||
         nameColumnSort == "" ||
-        !methodSort ||
-        methodSort == ""
+        !sortParam ||
+        sortParam == ""
       )
         return next(
           ApiError.badRequest(
-            "Incorrect nameTable or nameColumnSeacrh or content or nameColumnSort or methodSort"
+            "Incorrect nameTable or nameColumnSeacrh or content or nameColumnSort or sortParam"
           )
         );
 
       const query =
         `
       SELECT * FROM ?? WHERE ?? LIKE ? ORDER BY ?? ` +
-        (String(methodSort).toLocaleLowerCase() === "desc" ? "DESC" : "ASC");
+        (String(sortParam).toLocaleLowerCase() === "desc" ? "DESC" : "ASC");
 
       await db.query(
         query,
@@ -147,19 +147,17 @@ class GetDataTableController {
 
   async getClient_discount(req, res, next) {
     try {
-      const { nameColumn, methodSort } = req.query;
+      const { nameColumn, sortParam } = req.query;
 
-      if (!nameColumn || nameColumn == "" || !methodSort || methodSort == "")
-        return next(ApiError.badRequest("Incorrect nameColumn or methodSort"));
+      if (!nameColumn || nameColumn == "" || !sortParam || sortParam == "")
+        return next(ApiError.badRequest("Incorrect nameColumn or sortParam"));
 
       const query =
         nameColumn === "percentPromotionsUsers"
           ? `SELECT client.idClient, client.nameClient, client.emailClient, client.telephoneClient, client.addressClient, promotionsUsers.percentPromotionsUsers FROM client, promotionsUsers WHERE client.idClient = promotionsUsers.idClient ORDER BY promotionsUsers.?? ` +
-            (String(methodSort).toLocaleLowerCase() === "desc" ? "DESC" : "ASC")
+            (String(sortParam).toLocaleLowerCase() === "desc" ? "DESC" : "ASC")
           : `SELECT client.idClient, client.nameClient, client.emailClient, client.telephoneClient, client.addressClient, promotionsUsers.percentPromotionsUsers FROM client, promotionsUsers WHERE client.idClient = promotionsUsers.idClient ORDER BY client.?? ` +
-            (String(methodSort).toLocaleLowerCase() === "desc"
-              ? "DESC"
-              : "ASC");
+            (String(sortParam).toLocaleLowerCase() === "desc" ? "DESC" : "ASC");
 
       await db.query(query, [nameColumn], (err, data) => {
         if (err) return res.json(err);
@@ -172,43 +170,41 @@ class GetDataTableController {
 
   async getClient_discount_search(req, res, next) {
     try {
-      const { columnNameSort, columnNameSearch, methodSort, content } =
-        req.query;
-
+      const { columnNameSort, columnNameSearch, sortParam, content } =
+            req.query;
+        
       if (
         !columnNameSort ||
         columnNameSort == "" ||
         !columnNameSearch ||
         columnNameSearch == "" ||
-        !methodSort ||
-        methodSort == "" ||
+        !sortParam ||
+        sortParam == "" ||
         !content ||
         content == ""
       )
         return next(
           ApiError.badRequest(
-            "Incorrect or columnNameSort or columnNameSearch or methodSort or content"
+            "Incorrect or columnNameSort or columnNameSearch or sortParam or content"
           )
         );
 
       const query =
-        columnNameSort === "percentPromotionsUsers"
+        columnNameSearch === "percentPromotionsUsers"
           ? `SELECT client.idClient, client.nameClient, client.emailClient, client.telephoneClient, client.addressClient, promotionsUsers.percentPromotionsUsers
           FROM client, promotionsUsers
           WHERE client.idClient = promotionsUsers.idClient 
           AND promotionsUsers.??
           LIKE ? 
           ORDER BY ?? ` +
-            (String(methodSort).toLocaleLowerCase() === "desc" ? "DESC" : "ASC")
+            (String(sortParam).toLocaleLowerCase() === "desc" ? "DESC" : "ASC")
           : `SELECT client.idClient, client.nameClient, client.emailClient, client.telephoneClient, client.addressClient, promotionsUsers.percentPromotionsUsers
           FROM client, promotionsUsers
           WHERE client.idClient = promotionsUsers.idClient 
           AND client.??
           LIKE ?
           ORDER BY ?? ` +
-            (String(methodSort).toLocaleLowerCase() === "desc"
-              ? "DESC"
-              : "ASC");
+            (String(sortParam).toLocaleLowerCase() === "desc" ? "DESC" : "ASC");
 
       await db.query(
         query,

@@ -1,4 +1,5 @@
 import { useContext, useEffect } from "react";
+import { autorun } from "mobx";
 import { observer } from "mobx-react-lite";
 
 import { Context } from "../../index";
@@ -18,6 +19,7 @@ const UniversalTables = observer(({ nameTable }) => {
       case "CREDENTIALS_NAMECOLUMNE":
         getDataTable(name).then((data) => {
           dataTables.setDataCredentials(data);
+          autorun(() => dataTables.refresh());
         });
         break;
       case "SALE_NAMECOLUMNE":
@@ -37,7 +39,6 @@ const UniversalTables = observer(({ nameTable }) => {
         break;
       case "PRODUCTINFO_NAMECOLUMNE":
         getDataTable("product_info").then((data) => {
-            console.log(data);
           dataTables.setDataProductInfo(data);
         });
         break;
@@ -79,7 +80,8 @@ const UniversalTables = observer(({ nameTable }) => {
           <th className="datagrid-thead-cell">
             <span
               className="datagrid-thead-input-wrap"
-              onClick={() => dataTables.checkedInputAll()}>
+              onClick={() => dataTables.checkedInputAll()}
+            >
               <input className="datagrid-thead-input" type="checkbox" />
               <CheckedAll nameTable={nameTable} />
               <span className="datagrid-thead-input-root"></span>

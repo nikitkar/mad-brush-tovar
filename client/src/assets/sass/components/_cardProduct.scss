@@ -45,7 +45,7 @@
     }
 
     &__item {
-      max-width: 330px;
+    //   max-width: 330px;
       width: 100%;
 
       display: flex;
@@ -59,12 +59,19 @@
 
       &-value {
         color: $color-text_dark;
+        text-align: justify;
+
+        @include font(18px, 500);
+
+        & span{
+            color: $color-red;
+        }
       }
     }
   }
 
   &-payment {
-    @include displayFlex(flex-start, flex-start, column);
+    @include displayFlex(flex-end, flex-start, column);
     gap: 15px;
 
     max-width: 330px;
@@ -76,7 +83,7 @@
     padding-top: 30px;
 
     &__coast {
-      @include displayFlex(flex-start, space-between);
+      @include displayFlex(flex-start, flex-end);
       width: 100%;
     }
 
