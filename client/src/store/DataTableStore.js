@@ -3,7 +3,6 @@ import { makeAutoObservable } from "mobx";
 import {
   deletedRow,
   getClient_discount_search,
-  getDataTable,
   getDataUser_discount,
   searchData,
   sortData,
@@ -62,7 +61,7 @@ export default class DataTableStore {
         ? sortData(nameSort, item, this._sortMethod).then((data) => {
             if (data.err || data.sqlMessage)
               return alert(data.err || data.sqlMessage);
-            else saveDateResult(data); // не видит что-то в функции, думаю нет привязки к this или что-то такого
+            else saveDateResult(data);
           })
         : null
     );
@@ -85,6 +84,12 @@ export default class DataTableStore {
           })
         : null
     );
+  }
+
+  auxiliary_refresh(array, nameTable, funcSave) {
+    if (this._valueSearchData === "" || this._selectOption === "")
+      this.refreshDontParams(array, nameTable, funcSave.bind(this));
+    else this.refreshWithParams(array, nameTable, funcSave.bind(this));
   }
 
   // обновляет таблицы
@@ -120,167 +125,67 @@ export default class DataTableStore {
 
         return null;
       }
-      case "CREDENTIALS_NAMECOLUMNE": {
-        if (this._valueSearchData === "" || this._selectOption === "") {
-          this.refreshDontParams(
-            CREDENTIALS_NAMECOLUMNE,
-            "credentials",
-            this.setDataCredentials.bind(this)
-          );
-        } else {
-          this.refreshWithParams(
-            CREDENTIALS_NAMECOLUMNE,
-            "credentials",
-            this.setDataCredentials.bind(this)
-          );
-        }
+      case "CREDENTIALS_NAMECOLUMNE":
+        return this.auxiliary_refresh(
+          CREDENTIALS_NAMECOLUMNE,
+          "credentials",
+          this.setDataCredentials
+        );
 
-        return null;
-      }
-      case "SALE_NAMECOLUMNE": {
-        if (this._valueSearchData === "" || this._selectOption === "")
-          this.refreshDontParams(
-            SALE_NAMECOLUMNE,
-            "sale",
-            this.setDataSale.bind(this)
-          );
-        else
-          this.refreshWithParams(
-            SALE_NAMECOLUMNE,
-            "sale",
-            this.setDataSale.bind(this)
-          );
-
-        return null;
-      }
-      case "SALESARCHIVE_NAMECOLUMNE": {
-        if (this._valueSearchData === "" || this._selectOption === "")
-          this.refreshDontParams(
-            SALESARCHIVE_NAMECOLUMNE,
-            "salesarchive",
-            this.setDataSalesArchive.bind(this)
-          );
-        else
-          this.refreshWithParams(
-            SALESARCHIVE_NAMECOLUMNE,
-            "salesarchive",
-            this.setDataSalesArchive.bind(this)
-          );
-
-        return null;
-      }
-      case "PRODUCT_NAMECOLUMNE": {
-        if (this._valueSearchData === "" || this._selectOption === "")
-          this.refreshDontParams(
-            PRODUCT_NAMECOLUMNE,
-            "product",
-            this.setDataProduct.bind(this)
-          );
-        else
-          this.refreshWithParams(
-            PRODUCT_NAMECOLUMNE,
-            "product",
-            this.setDataProduct.bind(this)
-          );
-
-        return null;
-      }
-      case "PRODUCTINFO_NAMECOLUMNE": {
-        if (this._valueSearchData === "" || this._selectOption === "")
-          this.refreshDontParams(
-            PRODUCTINFO_NAMECOLUMNE,
-            "product_info",
-            this.setDataProductInfo.bind(this)
-          );
-        else
-          this.refreshWithParams(
-            PRODUCTINFO_NAMECOLUMNE,
-            "product_info",
-            this.setDataProductInfo.bind(this)
-          );
-
-        return null;
-      }
-      case "CATEGORY_NAMECOLUMNE": {
-        if (this._valueSearchData === "" || this._selectOption === "")
-          this.refreshDontParams(
-            CATEGORY_NAMECOLUMNE,
-            "category",
-            this.setDataCategory.bind(this)
-          );
-        else
-          this.refreshWithParams(
-            CATEGORY_NAMECOLUMNE,
-            "category",
-            this.setDataCategory.bind(this)
-          );
-
-        return null;
-      }
-      case "POINTISSUE_NAMECOLUMNE": {
-        if (this._valueSearchData === "" || this._selectOption === "")
-          this.refreshDontParams(
-            POINTISSUE_NAMECOLUMNE,
-            "pointIssue",
-            this.setDataPointIssue.bind(this)
-          );
-        else
-          this.refreshWithParams(
-            POINTISSUE_NAMECOLUMNE,
-            "pointIssue",
-            this.setDataPointIssue.bind(this)
-          );
-
-        return null;
-      }
-      case "SUPPLIERS_NAMECOLUMNE": {
-        if (this._valueSearchData === "" || this._selectOption === "")
-          this.refreshDontParams(
-            SUPPLIERS_NAMECOLUMNE,
-            "suppliers",
-            this.setDataSuppliers.bind(this)
-          );
-        else
-          this.refreshWithParams(
-            SUPPLIERS_NAMECOLUMNE,
-            "suppliers",
-            this.setDataSuppliers.bind(this)
-          );
-
-        return null;
-      }
-      case "INVOICE_NAMECOLUMNE": {
-        if (this._valueSearchData === "" || this._selectOption === "")
-          this.refreshDontParams(
-            INVOICE_NAMECOLUMNE,
-            "invoice",
-            this.setDataInvoice.bind(this)
-          );
-        else
-          this.refreshWithParams(
-            INVOICE_NAMECOLUMNE,
-            "invoice",
-            this.setDataInvoice.bind(this)
-          );
-
-        return null;
-      }
-      case "PRODUCTWAYBILL_NAMECOLUMNE": {
-        if (this._valueSearchData === "" || this._selectOption === "")
-          this.refreshDontParams(
-            PRODUCTWAYBILL_NAMECOLUMNE,
-            "productWaybill",
-            this.setDataProductWaybill.bind(this)
-          );
-        else
-          this.refreshWithParams(
-            PRODUCTWAYBILL_NAMECOLUMNE,
-            "productWaybill",
-            this.setDataProductWaybill.bind(this)
-          );
-
-        return null;
-      }
+      case "SALE_NAMECOLUMNE":
+        return this.auxiliary_refresh(
+          SALE_NAMECOLUMNE,
+          "sale",
+          this.setDataSale
+        );
+      case "SALESARCHIVE_NAMECOLUMNE":
+        return this.auxiliary_refresh(
+          SALESARCHIVE_NAMECOLUMNE,
+          "salesarchive",
+          this.setDataSalesArchive
+        );
+      case "PRODUCT_NAMECOLUMNE":
+        return this.auxiliary_refresh(
+          PRODUCT_NAMECOLUMNE,
+          "product",
+          this.setDataProduct
+        );
+      case "PRODUCTINFO_NAMECOLUMNE":
+        return this.auxiliary_refresh(
+          PRODUCTINFO_NAMECOLUMNE,
+          "product_info",
+          this.setDataProductInfo
+        );
+      case "CATEGORY_NAMECOLUMNE":
+        return this.auxiliary_refresh(
+          CATEGORY_NAMECOLUMNE,
+          "category",
+          this.setDataCategory
+        );
+      case "POINTISSUE_NAMECOLUMNE":
+        return this.auxiliary_refresh(
+          POINTISSUE_NAMECOLUMNE,
+          "pointIssue",
+          this.setDataPointIssue
+        );
+      case "SUPPLIERS_NAMECOLUMNE":
+        return this.auxiliary_refresh(
+          SUPPLIERS_NAMECOLUMNE,
+          "suppliers",
+          this.setDataSuppliers
+        );
+      case "INVOICE_NAMECOLUMNE":
+        return this.auxiliary_refresh(
+          INVOICE_NAMECOLUMNE,
+          "invoice",
+          this.setDataInvoice
+        );
+      case "PRODUCTWAYBILL_NAMECOLUMNE":
+        return this.auxiliary_refresh(
+          PRODUCTWAYBILL_NAMECOLUMNE,
+          "productWaybill",
+          this.setDataProductWaybill
+        );
 
       default:
         return null;
@@ -293,8 +198,6 @@ export default class DataTableStore {
     if (this._sortColumnIndex !== index) this.setSortMethod("ASC");
 
     this.setSortColumnIndex(index);
-
-    // this.refresh();
   }
 
   // выбрать одну строку
@@ -329,93 +232,79 @@ export default class DataTableStore {
   // выбрать все строки
   checkedInputAll() {
     switch (this._activeTable) {
-      case "CLIENT_NAMECOLUMNE": {
-        this.auxiliary_checkedInputAll(this._dataUser, "idClient");
+      case "CLIENT_NAMECOLUMNE":
+        return this.auxiliary_checkedInputAll(this._dataUser, "idClient");
 
-        return null;
-      }
-      case "CREDENTIALS_NAMECOLUMNE": {
-        this.auxiliary_checkedInputAll(this._dataCredentials, "idCredentials");
+      case "CREDENTIALS_NAMECOLUMNE":
+        return this.auxiliary_checkedInputAll(
+          this._dataCredentials,
+          "idCredentials"
+        );
 
-        return null;
-      }
-      case "SALE_NAMECOLUMNE": {
-        this.auxiliary_checkedInputAll(this._dataSale, "idSale");
+      case "SALE_NAMECOLUMNE":
+        return this.auxiliary_checkedInputAll(this._dataSale, "idSale");
 
-        return null;
-      }
-      case "SALESARCHIVE_NAMECOLUMNE": {
-        this.auxiliary_checkedInputAll(
+      case "SALESARCHIVE_NAMECOLUMNE":
+        return this.auxiliary_checkedInputAll(
           this._dataSalesArchive,
           "idSalesArchive"
         );
 
-        return null;
-      }
-      case "PRODUCT_NAMECOLUMNE": {
-        this.auxiliary_checkedInputAll(this._dataProduct, "idProduct");
+      case "PRODUCT_NAMECOLUMNE":
+        return this.auxiliary_checkedInputAll(this._dataProduct, "idProduct");
 
-        return null;
-      }
-      case "PRODUCTINFO_NAMECOLUMNE": {
-        this.auxiliary_checkedInputAll(this._dataProductInfo, "idProductInfo");
+      case "PRODUCTINFO_NAMECOLUMNE":
+        return this.auxiliary_checkedInputAll(
+          this._dataProductInfo,
+          "idProductInfo"
+        );
 
-        return null;
-      }
-      case "CATEGORY_NAMECOLUMNE": {
-        this.auxiliary_checkedInputAll(this._dataCategory, "idCategory");
+      case "CATEGORY_NAMECOLUMNE":
+        return this.auxiliary_checkedInputAll(this._dataCategory, "idCategory");
 
-        return null;
-      }
-      case "POINTISSUE_NAMECOLUMNE": {
-        this.auxiliary_checkedInputAll(this._dataPointIssue, "idPointIssue");
+      case "POINTISSUE_NAMECOLUMNE":
+        return this.auxiliary_checkedInputAll(
+          this._dataPointIssue,
+          "idPointIssue"
+        );
 
-        return null;
-      }
-      case "SUPPLIERS_NAMECOLUMNE": {
-        this.auxiliary_checkedInputAll(this._dataSuppliers, "idSuppliers");
+      case "SUPPLIERS_NAMECOLUMNE":
+        return this.auxiliary_checkedInputAll(
+          this._dataSuppliers,
+          "idSuppliers"
+        );
 
-        return null;
-      }
-      case "INVOICE_NAMECOLUMNE": {
-        this.auxiliary_checkedInputAll(this._dataInvoice, "idInvoice");
+      case "INVOICE_NAMECOLUMNE":
+        return this.auxiliary_checkedInputAll(this._dataInvoice, "idInvoice");
 
-        return null;
-      }
-      case "PRODUCTWAYBILL_NAMECOLUMNE": {
-        this.auxiliary_checkedInputAll(
+      case "PRODUCTWAYBILL_NAMECOLUMNE":
+        return this.auxiliary_checkedInputAll(
           this._dataProductWaybill,
           "idProductWaybill"
         );
-
-        return null;
-      }
 
       default:
         return null;
     }
   }
 
-  // поиск по таблице - дополнительная функция
-  auxiliary_searchData_change(nameColumn, idNameColumn, setDataFunction) {
-    searchData(nameColumn, this._selectOption, this._valueSearchData).then(
-      (data) => {
-        if (data.err) {
-          searchData(nameColumn, idNameColumn, "").then((data) =>
-            setDataFunction(data)
-          );
+  //   поиск по таблице - дополнительная функция
+  auxiliary_searchData_change(values, nameColumn, setDataFunction) {
+    if (this._selectOption === "") return null;
+
+    this.setValueSearchData(values);
+
+    setTimeout(() => {
+      searchData(nameColumn, this._selectOption, this._valueSearchData).then(
+        (data) => {
+          setDataFunction(data);
           this.setSelectedInputs([]);
-
-          return;
         }
-
-        setDataFunction(data);
-        this.setSelectedInputs([]);
-      }
-    );
+      );
+    }, 600);
   }
 
-  // поиск по таблице
+  //   поиск по таблице
   searchData_change(values) {
     switch (this._activeTable) {
       case "CLIENT_NAMECOLUMNE": {
@@ -446,136 +335,66 @@ export default class DataTableStore {
 
         return null;
       }
-      case "CREDENTIALS_NAMECOLUMNE": {
-        this.setValueSearchData(values);
-
-        setTimeout(() => {
-          this.auxiliary_searchData_change(
-            "credentials",
-            "idCredentials",
-            this.setDataCredentials.bind(this)
-          );
-        }, 600);
-
-        return null;
-      }
-      case "SALE_NAMECOLUMNE": {
-        this.setValueSearchData(values);
-
-        setTimeout(() => {
-          this.auxiliary_searchData_change(
-            "sale",
-            "idSale",
-            this.setDataSale.bind(this)
-          );
-        }, 600);
-
-        return null;
-      }
-      case "SALESARCHIVE_NAMECOLUMNE": {
-        this.setValueSearchData(values);
-
-        setTimeout(() => {
-          this.auxiliary_searchData_change(
-            "salesArchive",
-            "idSalesArchive",
-            this.setDataSalesArchive.bind(this)
-          );
-        }, 600);
-
-        return null;
-      }
-      case "PRODUCT_NAMECOLUMNE": {
-        this.setValueSearchData(values);
-
-        setTimeout(() => {
-          this.auxiliary_searchData_change(
-            "product",
-            "idProduct",
-            this.setDataProduct.bind(this)
-          );
-        }, 600);
-
-        return null;
-      }
-      case "PRODUCTINFO_NAMECOLUMNE": {
-        this.setValueSearchData(values);
-
-        setTimeout(() => {
-          this.auxiliary_searchData_change(
-            "product_info",
-            "idProductInfo",
-            this.setDataProductInfo.bind(this)
-          );
-        }, 600);
-
-        return null;
-      }
-      case "CATEGORY_NAMECOLUMNE": {
-        this.setValueSearchData(values);
-
-        setTimeout(() => {
-          this.auxiliary_searchData_change(
-            "category",
-            "idCategory",
-            this.setDataCategory.bind(this)
-          );
-        }, 600);
-
-        return null;
-      }
-      case "POINTISSUE_NAMECOLUMNE": {
-        this.setValueSearchData(values);
-
-        setTimeout(() => {
-          this.auxiliary_searchData_change(
-            "pointIssue",
-            "idPointIssue",
-            this.setDataPointIssue.bind(this)
-          );
-        }, 600);
-
-        return null;
-      }
-      case "SUPPLIERS_NAMECOLUMNE": {
-        this.setValueSearchData(values);
-
-        setTimeout(() => {
-          this.auxiliary_searchData_change(
-            "suppliers",
-            "idSuppliers",
-            this.setDataSuppliers.bind(this)
-          );
-        }, 600);
-
-        return null;
-      }
-      case "INVOICE_NAMECOLUMNE": {
-        this.setValueSearchData(values);
-
-        setTimeout(() => {
-          this.auxiliary_searchData_change(
-            "invoice",
-            "idInvoice",
-            this.setDataInvoice.bind(this)
-          );
-        }, 600);
-
-        return null;
-      }
-      case "PRODUCTWAYBILL_NAMECOLUMNE": {
-        this.setValueSearchData(values);
-
-        setTimeout(() => {
-          this.auxiliary_searchData_change(
-            "productWaybill",
-            "idProductWaybill",
-            this.setDataProductWaybill.bind(this)
-          );
-        }, 600);
-
-        return null;
-      }
+      case "CREDENTIALS_NAMECOLUMNE":
+        return this.auxiliary_searchData_change(
+          values,
+          "credentials",
+          this.setDataCredentials.bind(this)
+        );
+      case "SALE_NAMECOLUMNE":
+        return this.auxiliary_searchData_change(
+          values,
+          "sale",
+          this.setDataSale.bind(this)
+        );
+      case "SALESARCHIVE_NAMECOLUMNE":
+        return this.auxiliary_searchData_change(
+          values,
+          "salesArchive",
+          this.setDataSalesArchive.bind(this)
+        );
+      case "PRODUCT_NAMECOLUMNE":
+        return this.auxiliary_searchData_change(
+          values,
+          "product",
+          this.setDataProduct.bind(this)
+        );
+      case "PRODUCTINFO_NAMECOLUMNE":
+        return this.auxiliary_searchData_change(
+          values,
+          "product_info",
+          this.setDataProductInfo.bind(this)
+        );
+      case "CATEGORY_NAMECOLUMNE":
+        return this.auxiliary_searchData_change(
+          values,
+          "category",
+          this.setDataCategory.bind(this)
+        );
+      case "POINTISSUE_NAMECOLUMNE":
+        return this.auxiliary_searchData_change(
+          values,
+          "pointIssue",
+          this.setDataPointIssue.bind(this)
+        );
+      case "SUPPLIERS_NAMECOLUMNE":
+        return this.auxiliary_searchData_change(
+          values,
+          "suppliers",
+          this.setDataSuppliers.bind(this)
+        );
+      case "INVOICE_NAMECOLUMNE":
+        return this.auxiliary_searchData_change(
+          values,
+          "invoice",
+          this.setDataInvoice.bind(this)
+        );
+      case "PRODUCTWAYBILL_NAMECOLUMNE":
+        return this.auxiliary_searchData_change(
+          values,
+          "productWaybill",
+          this.setDataProductWaybill.bind(this)
+        );
 
       default:
         return;

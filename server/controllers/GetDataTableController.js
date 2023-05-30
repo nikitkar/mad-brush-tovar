@@ -50,9 +50,7 @@ class GetDataTableController {
       !nameTable ||
       nameTable == "" ||
       !nameColumn ||
-      nameColumn == "" ||
-      !content ||
-      content == ""
+      nameColumn == ""
     )
       return next(
         ApiError.badRequest("Incorrect content or nameTable or nameColumn")
