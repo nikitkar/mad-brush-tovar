@@ -1,7 +1,7 @@
 .product {
   background-color: $color-white;
   padding: 40px 0;
-  
+
   &-wrapper {
     @include displayFlex(flex-start, flex-start, column);
     gap: 45px;
@@ -16,12 +16,16 @@
     @include displayFlex(flex-start, space-between);
     gap: 35px;
 
+    flex-wrap: wrap;
+
     width: 100%;
   }
 
   &-img {
     object-fit: contain;
     vertical-align: middle;
+
+    width: 100%;
 
     &-wrap {
       width: 560px;
@@ -34,6 +38,10 @@
     gap: 30px;
 
     width: 100%;
+
+    @media screen and (max-width: 720px) {
+      flex-wrap: wrap;
+    }
   }
 
   &-params {
@@ -45,7 +53,7 @@
     }
 
     &__item {
-    //   max-width: 330px;
+      //   max-width: 330px;
       width: 100%;
 
       display: flex;
@@ -63,8 +71,8 @@
 
         @include font(18px, 500);
 
-        & span{
-            color: $color-red;
+        & span {
+          color: $color-red;
         }
       }
     }

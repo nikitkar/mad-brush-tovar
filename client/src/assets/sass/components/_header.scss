@@ -23,9 +23,22 @@
 
     padding-bottom: 20px;
 
+    @media screen and (max-width: 945px) {
+      gap: 0;
+      row-gap: 10px;
+
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
     &_right {
       @include displayFlex(center, flex-end);
       gap: 30px;
+
+      @media screen and (max-width: 660px) {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
     }
   }
 
@@ -87,10 +100,15 @@
   border-right: 1px solid rgba(133, 143, 164, 0.15);
   border-radius: 1px;
 
+  @media screen and (max-width: 660px) {
+    padding: 0;
+  }
+
   &-tel {
     @include font($size-main, 500);
     color: $color-white;
     text-transform: uppercase;
+    white-space: nowrap;
   }
 }
 

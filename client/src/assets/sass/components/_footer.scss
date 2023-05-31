@@ -7,6 +7,10 @@
 
   padding: 90px 0 50px;
 
+  @media screen and (max-width: 945px) {
+    padding: 50px 0;
+  }
+
   &-wrapper {
     width: 100%;
 
@@ -18,11 +22,28 @@
     gap: 20px;
 
     width: 100%;
+
+    @media screen and (max-width: 945px) {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+
+  .social {
+    &-text {
+      white-space: nowrap;
+    }
   }
 
   .communications {
     border: none;
     width: auto;
+
+    flex-wrap: wrap;
+
+    @media screen and (max-width: 1275px) {
+      gap: 10px;
+    }
 
     &-tel {
       color: #858fa4;

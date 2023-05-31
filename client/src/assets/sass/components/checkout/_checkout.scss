@@ -23,6 +23,10 @@
     gap: 30px;
 
     width: 100%;
+
+    @media screen and (max-width: 940px) {
+      flex-wrap: wrap;
+    }
   }
 
   &-left {
@@ -100,7 +104,9 @@
   &-aside {
     @include displayFlex(flex-start, flex-start, column);
     gap: 20px;
-    width: 450px;
+
+    max-width: 450px;
+    width: 100%;
 
     &-title {
       @include font(28px, 700);
@@ -117,6 +123,10 @@
 
       @include displayFlex(flex-start, space-between);
       gap: 7px;
+
+      @media screen and (max-width: 940px) {
+        flex-wrap: wrap;
+      }
 
       &__img {
         object-fit: cover;
@@ -136,11 +146,22 @@
         @include displayFlex(flex-end, flex-start, column);
         width: 100px;
 
+        @media screen and (max-width: 940px) {
+          @include displayFlex(center, flex-start, row);
+          gap: 5px;
+
+          text-align: center;
+        }
+
         & span {
           margin-top: auto;
 
           @include font(12px, 400);
           color: $color-dark_grey;
+
+          @media screen and (max-width: 940px) {
+            margin: 0;
+          }
         }
       }
     }

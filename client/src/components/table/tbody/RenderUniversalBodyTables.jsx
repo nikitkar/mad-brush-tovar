@@ -78,7 +78,6 @@ const RenderUniversalBodyTables = observer(({ nameTable }) => {
     switch (nameTable) {
       case "CREDENTIALS_NAMECOLUMNE":
         return renderRows("dataCredentials");
-
       case "SALE_NAMECOLUMNE":
         return renderRows("dataSale");
       case "SALESARCHIVE_NAMECOLUMNE":

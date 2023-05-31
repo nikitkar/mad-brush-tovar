@@ -176,7 +176,7 @@
     position: sticky;
     top: 10px;
 
-    width: 300px;
+    width: 20%;
 
     @include font(14px, 400);
 
@@ -227,7 +227,7 @@
   &-paper {
     position: relative;
 
-    width: 100%;
+    width: 80%;
 
     background-color: #fff;
     color: rgba(0, 0, 0, 0.87);

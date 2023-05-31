@@ -89,7 +89,6 @@ export const PRODUCT_NAMECOLUMNE = [
 export const PRODUCTINFO_NAMECOLUMNE = [
   "idProductInfo",
   "idProduct",
-  "titleProduct",
   "descriptionProduct",
 ];
 export const CATEGORY_NAMECOLUMNE = [
