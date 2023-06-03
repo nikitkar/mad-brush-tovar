@@ -65,11 +65,13 @@ const RenderUniversalBodyTables = observer(({ nameTable }) => {
 
     return (
       <>
-        {dataTables[array].map((nameColumn, index) => (
-          <tr className="datagrid-tbody-row" key={index}>
-            {renderColumns(nameColumn, nameTable)}
-          </tr>
-        ))}
+        {dataTables[array].map((nameColumn, index) => {
+          return (
+            <tr className="datagrid-tbody-row" key={index}>
+              {renderColumns(nameColumn, nameTable)}
+            </tr>
+          );
+        })}
       </>
     );
   };

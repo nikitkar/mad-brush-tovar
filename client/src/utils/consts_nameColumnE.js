@@ -1,4 +1,12 @@
 export const ALLS_NAMECOLUMNE = {
+  CLIENT_NAMECOLUMNE: [
+    "idClient",
+    "nameClient",
+    "emailClient",
+    "telephoneClient",
+    "addressClient",
+    "percentPromotionsUsers",
+  ],
   CREDENTIALS_NAMECOLUMNE: [
     "idCredentials",
     "idClient",
@@ -22,11 +30,7 @@ export const ALLS_NAMECOLUMNE = {
     "priceProduct",
     "imgProduct",
   ],
-  PRODUCTINFO_NAMECOLUMNE: [
-    "idProductInfo",
-    "idProduct",
-    "descriptionProduct",
-  ],
+  PRODUCTINFO_NAMECOLUMNE: ["idProductInfo", "idProduct", "descriptionProduct"],
   CATEGORY_NAMECOLUMNE: ["idCategory", "nameCategory", "imgCategory"],
   POINTISSUE_NAMECOLUMNE: [
     "idPointIssue",

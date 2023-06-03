@@ -4,6 +4,7 @@ import { observer } from "mobx-react-lite";
 import { Context } from "../../../index";
 
 import { ALLS_NAMECOLUMNR } from "../../../utils/consts_nameColumnR";
+import { ALLS_NAMECOLUMNE } from "../../../utils/consts_nameColumnE";
 
 const RenderSelectOption = observer(({ nameTable }) => {
   const { dataTables } = useContext(Context);
@@ -11,7 +12,11 @@ const RenderSelectOption = observer(({ nameTable }) => {
 
   const auxiliary_renderOption = () =>
     matchingColumns.map((item, index) => (
-      <option key={index} className="mui-toolbar-search-option" value={item}>
+      <option
+        key={index}
+        className="mui-toolbar-search-option"
+        value={ALLS_NAMECOLUMNE[nameTable][index]}
+      >
         {item}
       </option>
     ));

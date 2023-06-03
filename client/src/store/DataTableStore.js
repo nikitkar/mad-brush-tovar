@@ -51,6 +51,9 @@ export default class DataTableStore {
     //на какой таблице пользовать находится
     this._activeTable = "";
 
+    // таблица пуста: true - да; false - нет
+    this._emptyTable = false;
+
     makeAutoObservable(this);
   }
 
@@ -572,6 +575,10 @@ export default class DataTableStore {
     this._activeTable = table;
   }
 
+  setEmptyTable(bool) {
+    this._emptyTable = bool;
+  }
+
   get dataUser() {
     return this._dataUser;
   }
@@ -638,5 +645,9 @@ export default class DataTableStore {
 
   get activeTable() {
     return this._activeTable;
+  }
+
+  get emptyTable() {
+    return this._emptyTable;
   }
 }
