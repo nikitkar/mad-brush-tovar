@@ -17,41 +17,46 @@ class GetDataTableController {
   }
 
   async deletedRow(req, res, next) {
-    const { id, nameTable, nameColumn } = req.query;
+    try {
+      const { id, nameTable, nameColumn } = req.query;
 
-    if (
-      !id ||
-      id == "" ||
-      !nameTable ||
-      nameTable == "" ||
-      !nameColumn ||
-      nameColumn == ""
-    )
-      return next(
-        ApiError.badRequest("Incorrect id or nameTable or nameColumn")
-      );
+      if (
+        !id ||
+        id == "" ||
+        !nameTable ||
+        nameTable == "" ||
+        !nameColumn ||
+        nameColumn == ""
+      )
+        return next(
+          ApiError.badRequest("Incorrect id or nameTable or nameColumn")
+        );
 
-    const query = `DELETE FROM ?? WHERE ??.??=??`;
+      if (nameTable === "client") {
+        const query = `DELETE FROM promotionsUsers WHERE promotionsUsers.idClient=?`;
 
-    await db.query(
-      query,
-      [nameTable, nameTable, nameColumn, id],
-      (err, data) => {
-        if (err) return res.json(err);
-        else return res.json(data);
+        db.query(query, [id]);
       }
-    );
+
+      const query = `DELETE FROM ?? WHERE ??.??=?`;
+
+      await db.query(
+        query,
+        [nameTable, nameTable, nameColumn, id],
+        (err, data) => {
+          if (err) return res.json({ err: err });
+          else return res.json({ message: "Запись удалена" });
+        }
+      );
+    } catch (e) {
+      next(ApiError.badRequest(e.message));
+    }
   }
 
   async searchData(req, res, next) {
     const { nameTable, nameColumn, content } = req.query;
 
-    if (
-      !nameTable ||
-      nameTable == "" ||
-      !nameColumn ||
-      nameColumn == ""
-    )
+    if (!nameTable || nameTable == "" || !nameColumn || nameColumn == "")
       return next(
         ApiError.badRequest("Incorrect content or nameTable or nameColumn")
       );
@@ -169,8 +174,8 @@ class GetDataTableController {
   async getClient_discount_search(req, res, next) {
     try {
       const { columnNameSort, columnNameSearch, sortParam, content } =
-            req.query;
-        
+        req.query;
+
       if (
         !columnNameSort ||
         columnNameSort == "" ||

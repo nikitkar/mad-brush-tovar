@@ -404,96 +404,37 @@ export default class DataTableStore {
     }
   }
 
+  auxiliary_deleteRow(nameTable, nameColumn) {
+      this._selectedInputs.map((selectedInput) =>
+          deletedRow(selectedInput, nameTable, nameColumn).then((data) => data.err ? alert("Ошибка при удалении записи") : alert(data.message)
+      )
+    );
+  }
+
   deleteRow() {
     switch (this._activeTable) {
       case "CLIENT_NAMECOLUMNE":
-        this._selectedInputs.map((selectedInput) =>
-          deletedRow(selectedInput, "client", "idClient").then((data) =>
-            alert(data)
-          )
-        );
-
-        break;
+        return this.auxiliary_deleteRow("client", "idClient");
       case "CREDENTIALS_NAMECOLUMNE":
-        this._selectedInputs.map((selectedInput) =>
-          deletedRow(selectedInput, "credentials", "idCredentials").then(
-            (data) => alert(data)
-          )
-        );
-
-        break;
+        return this.auxiliary_deleteRow("credentials", "idCredentials");
       case "SALE_NAMECOLUMNE":
-        this._selectedInputs.map((selectedInput) =>
-          deletedRow(selectedInput, "sale", "idSale").then((data) =>
-            alert(data)
-          )
-        );
-
-        break;
+        return this.auxiliary_deleteRow("sale", "idSale");
       case "SALESARCHIVE_NAMECOLUMNE":
-        this._selectedInputs.map((selectedInput) =>
-          deletedRow(selectedInput, "salesArchive", "idSalesArchive").then(
-            (data) => alert(data)
-          )
-        );
-
-        break;
+        return this.auxiliary_deleteRow("salesArchive", "idSalesArchive");
       case "PRODUCT_NAMECOLUMNE":
-        this._selectedInputs.map((selectedInput) =>
-          deletedRow(selectedInput, "product", "idProduct").then((data) => {
-            alert(data.err ? data.err : "Успешно");
-          })
-        );
-
-        break;
+        return this.auxiliary_deleteRow("product", "idProduct");
       case "PRODUCTINFO_NAMECOLUMNE":
-        this._selectedInputs.map((selectedInput) =>
-          deletedRow(selectedInput, "product_info", "idProductInfo").then(
-            (data) => alert(data)
-          )
-        );
-
-        break;
+        return this.auxiliary_deleteRow("product_info", "idProductInfo");
       case "CATEGORY_NAMECOLUMNE":
-        this._selectedInputs.map((selectedInput) =>
-          deletedRow(selectedInput, "category", "idCategory").then((data) =>
-            alert(data)
-          )
-        );
-
-        break;
+        return this.auxiliary_deleteRow("category", "idCategory");
       case "POINTISSUE_NAMECOLUMNE":
-        this._selectedInputs.map((selectedInput) =>
-          deletedRow(selectedInput, "pointIssue", "idPointIssue").then((data) =>
-            alert(data)
-          )
-        );
-
-        break;
+        return this.auxiliary_deleteRow("pointIssue", "idPointIssue");
       case "SUPPLIERS_NAMECOLUMNE":
-        this._selectedInputs.map((selectedInput) =>
-          deletedRow(selectedInput, "suppliers", "idSuppliers").then((data) =>
-            alert(data)
-          )
-        );
-
-        break;
+        return this.auxiliary_deleteRow("suppliers", "idSuppliers");
       case "INVOICE_NAMECOLUMNE":
-        this._selectedInputs.map((selectedInput) =>
-          deletedRow(selectedInput, "invoice", "idInvoice").then((data) =>
-            alert(data)
-          )
-        );
-
-        break;
+        return this.auxiliary_deleteRow("invoice", "idInvoice");
       case "PRODUCTWAYBILL_NAMECOLUMNE":
-        this._selectedInputs.map((selectedInput) =>
-          deletedRow(selectedInput, "productWaybill", "idProductWaybill").then(
-            (data) => alert(data)
-          )
-        );
-
-        break;
+        return this.auxiliary_deleteRow("productWaybill", "idProductWaybill");
 
       default:
         return;
