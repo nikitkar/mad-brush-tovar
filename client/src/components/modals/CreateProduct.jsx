@@ -102,7 +102,7 @@ const CreateProduct = observer(({ stateModal, onClick }) => {
             />
           </div>
 
-          <div className="createProduct-box">
+          {/* <div className="createProduct-box">
             <label className="createProduct-box__text">Количество товара</label>
             <input
               className="createProduct-input"
@@ -111,7 +111,7 @@ const CreateProduct = observer(({ stateModal, onClick }) => {
               value={count}
               onChange={(e) => setCount(Number(e.target.value))}
             />
-          </div>
+          </div> */}
 
           <div className="createProduct-box">
             <label className="createProduct-box__text">

@@ -84,8 +84,9 @@ class ProductController {
 
       if (idCategory) {
         const productCategoryQuery = `SELECT * FROM product WHERE idCategory=? LIMIT ? OFFSET ?`;
+        const productCategoryAllQuery = `SELECT COUNT(*) as count FROM product WHERE idCategory=?;`;
 
-        products = await new Promise((resolve) => {
+        let result = await new Promise((resolve) => {
           db.query(
             productCategoryQuery,
             [Number(idCategory), Number(limit), Number(offset)],
@@ -95,6 +96,19 @@ class ProductController {
             }
           );
         });
+
+        let countAll = await new Promise((resolve) => {
+          db.query(
+            productCategoryAllQuery,
+            [Number(idCategory)],
+            (err, data) => {
+              if (err) return res.json(err);
+              else return resolve(data);
+            }
+          );
+        });
+
+        products = { product: result, countAllProductCategories: countAll };
       }
 
       if (!idCategory) {

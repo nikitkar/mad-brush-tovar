@@ -133,17 +133,6 @@ const Admin = observer(() => {
               onClick={() => setValueChange("PRODUCTWAYBILL_NAMECOLUMNE")}>
               Товарная накладная
             </button>
-
-            <button
-              className="admins-add__button  btn-text"
-              onClick={() => setValueChange("Histogram")}>
-              Столбчатая диаграмма
-            </button>
-            <button
-              className="admins-add__button  btn-text"
-              onClick={() => setValueChange("PieChart")}>
-              Круговая диаграмма
-            </button>
           </div>
 
           <p>
@@ -157,28 +146,6 @@ const Admin = observer(() => {
           <div className="admins-body">
             <TablesPage nameTable={value} />
           </div>
-
-          {/* <div className="admins-add">
-            <button
-              className="add-products__product  btn-text"
-              onClick={() => setProductVisible(true)}>
-              Добавить товар
-            </button>
-            <button
-              className="add-products__category  btn-text"
-              onClick={() => setCategoryVisible(true)}>
-              Добавить категорию
-            </button>
-          </div> */}
-
-          {/* <CreateCategory
-            stateModal={categoryVisible}
-            onClick={() => setCategoryVisible(false)}
-          />
-          <CreateProduct
-            stateModal={productVisible}
-            onClick={() => setProductVisible(false)}
-          /> */}
         </div>
       </div>
     </section>

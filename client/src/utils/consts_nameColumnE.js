@@ -31,7 +31,7 @@ export const ALLS_NAMECOLUMNE = {
     "imgProduct",
   ],
   PRODUCTINFO_NAMECOLUMNE: ["idProductInfo", "idProduct", "descriptionProduct"],
-  CATEGORY_NAMECOLUMNE: ["idCategory", "nameCategory", "imgCategory"],
+  CATEGORY_NAMECOLUMNE: ["idCategory", "nameCategory"],
   POINTISSUE_NAMECOLUMNE: [
     "idPointIssue",
     "addressPointIssue",

@@ -31,11 +31,11 @@ class SaleControlles {
         )
       );
 
-    const query = `INSERT INTO sale(idClient, idProduct, dataSale, priceSale, countSale, numberSale) VALUES (?, ?, '?', ?, ?, ?)`;
+    const query = `INSERT INTO sale(idClient, idProduct, dataSale, priceSale, countSale, numberSale) VALUES (?, ?, ?, ?, ?, ?)`;
 
     await db.query(
       query,
-      [idClient, idProduct, priceSale, countSale, numberSale, dataSale],
+      [idClient, idProduct, dataSale, priceSale, countSale, numberSale],
       (err, data) => {
         if (err) return res.json(err);
         else return res.json({ message: "Successful" });

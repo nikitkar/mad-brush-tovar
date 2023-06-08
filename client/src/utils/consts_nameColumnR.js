@@ -24,7 +24,7 @@ export const ALLS_NAMECOLUMNR = {
     "Изображение товара",
   ],
   PRODUCTINFO_NAMECOLUMN: ["id", "id товара", "Значение"],
-  CATEGORY_NAMECOLUMN: ["id", "Название", "Изображение категории"],
+  CATEGORY_NAMECOLUMN: ["id", "Название"],
   POINTISSUE_NAMECOLUMN: ["id", "Адрес", "Время работы"],
   SUPPLIERS_NAMECOLUMN: ["id", "Название"],
   INVOICE_NAMECOLUMN: [

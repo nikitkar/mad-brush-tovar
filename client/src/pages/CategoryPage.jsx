@@ -17,16 +17,16 @@ const CategoryPage = observer(() => {
   const pages = [];
 
   useEffect(() => {
-    fetchProduct(categoriesByProducts.selectedCategory).then((data) => {
-      categoriesByProducts.setTotalCount(data.length);
-    });
+    fetchProduct(categoriesByProducts.selectedCategory).then((data) =>
+      categoriesByProducts.setTotalCount(
+        data.countAllProductCategories[0].count
+      )
+    );
     fetchProduct(
       categoriesByProducts.selectedCategory,
       categoriesByProducts.page,
       categoriesByProducts.limit
-    ).then((data) => {
-      categoriesByProducts.setPages(data);
-    });
+    ).then((data) => categoriesByProducts.setPages(data.product));
   }, [
     categoriesByProducts.selectedCategory,
     categoriesByProducts.page,
@@ -36,9 +36,10 @@ const CategoryPage = observer(() => {
 
   for (let i = 0; i < pageCount; i++) pages.push(i + 1);
 
-  useEffect(() => {
-    categoriesByProducts.setSelectedCategory(id);
-  }, [categoriesByProducts, id]);
+  useEffect(
+    () => categoriesByProducts.setSelectedCategory(id),
+    [categoriesByProducts, id]
+  );
 
   return (
     <>

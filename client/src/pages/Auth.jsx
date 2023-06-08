@@ -63,7 +63,7 @@ const Auth = observer(() => {
     try {
       let data;
 
-      if (isLogin) {
+      if (isLogin)
         data = await registration(
           loginInput,
           passwordInput,
@@ -72,9 +72,7 @@ const Auth = observer(() => {
           telephoneInput,
           addresslInput
         );
-      } else {
-        data = await login(loginInput, passwordInput);
-      }
+      else data = await login(loginInput, passwordInput);
 
       if (data === undefined) return "check error - " + data;
 
@@ -180,14 +178,16 @@ const Auth = observer(() => {
               <button
                 className="auth-modal__button  btn-modal"
                 type="button"
-                onClick={check}>
+                onClick={check}
+              >
                 Зарегистрироваться
               </button>
 
               <Link
                 className="auth-modal__auth"
                 to={LOGIN_ROUTE}
-                onClick={clearInput}>
+                onClick={clearInput}
+              >
                 Войти
               </Link>
             </>
@@ -196,14 +196,16 @@ const Auth = observer(() => {
               <button
                 className="auth-modal__button  btn-modal"
                 type="button"
-                onClick={check}>
+                onClick={check}
+              >
                 Войти
               </button>
 
               <Link
                 className="auth-modal__auth"
                 to={REGISTRATION_ROUTE}
-                onClick={clearInput}>
+                onClick={clearInput}
+              >
                 Зарегистрироваться
               </Link>
             </>

@@ -39,6 +39,7 @@ export default class DataTableStore {
 
     //delete
     this._selectedInputs = [];
+    this._countDeleteRow = 0;
 
     //search
     this._selectOption = "";
@@ -405,10 +406,17 @@ export default class DataTableStore {
   }
 
   auxiliary_deleteRow(nameTable, nameColumn) {
-      this._selectedInputs.map((selectedInput) =>
-          deletedRow(selectedInput, nameTable, nameColumn).then((data) => data.err ? alert("Ошибка при удалении записи") : alert(data.message)
-      )
-    );
+    this._selectedInputs.map((selectedInput, index) => {
+      console.log(this.countDeleteRow);
+      deletedRow(selectedInput, nameTable, nameColumn).then((data) =>
+        data.err ? alert("Ошибка при удалении записи") : null
+      );
+      this.setCountDeleteRow(index + 1);
+    });
+
+    if (this.countDeleteRow > 0)
+      alert(`Запись удалена (${this.countDeleteRow})`);
+    this.refresh();
   }
 
   deleteRow() {
@@ -496,6 +504,10 @@ export default class DataTableStore {
     );
   }
 
+  setCountDeleteRow(count) {
+    this._countDeleteRow = count;
+  }
+
   setSelectOption(selectOption) {
     this._selectOption = selectOption;
   }
@@ -566,6 +578,10 @@ export default class DataTableStore {
 
   get selectedInputs() {
     return this._selectedInputs;
+  }
+
+  get countDeleteRow() {
+    return this._countDeleteRow;
   }
 
   get selectOption() {

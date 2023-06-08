@@ -17,8 +17,8 @@ const Checkout = observer(() => {
   const onChangeName = (e) => setName(e.target.value);
 
   const createSales = () => {
-    if (name === "" || name == null || changeInput >= 4 || changeInput <= 0) {
-      alert("Некорректно введено имя или выбран адрес магазина");
+    if (name === "" || name == null) {
+      alert("Некорректно введено имя");
     } else {
       getNumberSale().then((data) => {
         const indexNumberSale = data[0]?.total;

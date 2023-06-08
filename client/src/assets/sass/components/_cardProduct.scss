@@ -16,9 +16,11 @@
     @include displayFlex(flex-start, space-between);
     gap: 35px;
 
-    flex-wrap: wrap;
-
     width: 100%;
+
+    @media screen and (max-width: 1050px) {
+      flex-wrap: wrap;
+    }
   }
 
   &-img {
@@ -53,7 +55,6 @@
     }
 
     &__item {
-      //   max-width: 330px;
       width: 100%;
 
       display: flex;
@@ -82,7 +83,7 @@
     @include displayFlex(flex-end, flex-start, column);
     gap: 15px;
 
-    max-width: 330px;
+    max-width: 190px;
     width: 100%;
     background-color: #f7f7f7;
     border-radius: 6px;
