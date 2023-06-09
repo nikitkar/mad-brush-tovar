@@ -5,15 +5,15 @@ import { db } from "../MySQL.js";
 class CategoryController {
   // добавлени в базу запись
   async create(req, res, next) {
-    const { name, imgCategory } = req.body;
+    const { name } = req.body;
 
     // проверка на валидность
-    if (!name || (name == "" && !imgCategory) || imgCategory == "")
-      return next(ApiError.badRequest("Incorrect name or img"));
+    if (!name || name == "")
+      return next(ApiError.badRequest("Incorrect name"));
 
-    const query = `INSERT INTO category(nameCategory, imgCategory) VALUES ('?', ?)`;
+    const query = `INSERT INTO category(nameCategory) VALUES (?)`;
 
-    await db.query(query, [name, imgCategory], (err, data) => {
+    await db.query(query, name, (err, data) => {
       if (err) return res.json(err);
       else return res.json({ message: "Successful" });
     });

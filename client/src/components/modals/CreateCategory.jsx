@@ -3,6 +3,8 @@ import { useContext, useEffect, useState } from "react";
 import { Context } from "../../index";
 
 import { createCategory } from "../../http/CategoryAPI";
+import { toast } from "react-toastify";
+import { TOAST_ERROR } from "../../utils/params_toast";
 
 const CreateCategory = ({ stateModal, onClick }) => {
   const { dataTables } = useContext(Context);
@@ -18,7 +20,7 @@ const CreateCategory = ({ stateModal, onClick }) => {
 
   const addCategory = () => {
     createCategory({ name: value }).then((data) => {
-      data.err ? alert(data.err) : setValue("");
+      data.err ? toast.error(data.err, TOAST_ERROR) : setValue("");
 
       onClick();
       dataTables.refresh();
@@ -36,7 +38,8 @@ const CreateCategory = ({ stateModal, onClick }) => {
           className === "createCategory-close"
         )
           onClick();
-      }}>
+      }}
+    >
       <div className="createCategory-body">
         <span className="createCategory-close" onClick={() => onClick()}></span>
 

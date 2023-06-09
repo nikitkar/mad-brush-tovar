@@ -6,17 +6,27 @@ import basketIcon from "../../../assets/images/icon/basket.svg";
 import { Context } from "../../../index";
 import { DEVICE_ROUTE } from "../../../utils/consts";
 
+import { toast } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
+import { TOAST_SUCCESS } from "../../../utils/params_toast";
+
 const CardProduct = (props) => {
   const { basket } = useContext(Context);
   const navigate = useNavigate();
 
-  const addItemBaskets = (id) => basket.addItem(id);
+  const addItemBaskets = (id) => {
+    basket.addItem(id);
+
+    toast.success("Товар добавлен в корзину", TOAST_SUCCESS);
+  };
 
   return (
     <>
       <div
         className="hits-item__img-block"
-        onClick={() => navigate(DEVICE_ROUTE + "/" + props.id)}>
+        onClick={() => navigate(DEVICE_ROUTE + "/" + props.id)}
+      >
         <img
           className="hits-item__img-block_img"
           src={process.env.REACT_APP_API_URL + props.path_img}
@@ -26,7 +36,8 @@ const CardProduct = (props) => {
       <div className="hits-item__content">
         <h3
           className="hits-item__title"
-          onClick={() => navigate(DEVICE_ROUTE + "/" + props.id)}>
+          onClick={() => navigate(DEVICE_ROUTE + "/" + props.id)}
+        >
           {props.title}
         </h3>
 
@@ -38,7 +49,8 @@ const CardProduct = (props) => {
 
           <button
             className="hits-item__btn  btn-icon"
-            onClick={() => addItemBaskets(props.id)}>
+            onClick={() => addItemBaskets(props.id)}
+          >
             <span className="hits-item__btn-icon  btn-icon_icon">
               <img
                 className="hits-item__btn-icon_img  btn-icon_icon-img"

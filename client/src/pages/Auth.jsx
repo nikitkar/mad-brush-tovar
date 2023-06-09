@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 
+
 import { observer } from "mobx-react-lite";
 
 import { REGISTRATION_ROUTE, LOGIN_ROUTE, HOME_ROUTE } from "../utils/consts";

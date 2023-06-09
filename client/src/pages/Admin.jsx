@@ -6,6 +6,7 @@ import { Context } from "../index";
 import TablesPage from "./TablesPage";
 
 import { getAll } from "../http/UserAPI";
+import ToastContainers from "../utils/params_toast";
 
 const Admin = observer(() => {
   const { user, dataTables } = useContext(Context);
@@ -75,62 +76,74 @@ const Admin = observer(() => {
 
   return (
     <section className="admins">
+      <ToastContainers />
       <div className="container">
         <div className="admins-wrapper">
           <div className="admins-add">
             <button
               className="admins-add__button  btn-text"
-              onClick={() => setValueChange("CLIENT_NAMECOLUMNE")}>
+              onClick={() => setValueChange("CLIENT_NAMECOLUMNE")}
+            >
               Клиенты
             </button>
             <button
               className="admins-add__button  btn-text"
-              onClick={() => setValueChange("CREDENTIALS_NAMECOLUMNE")}>
+              onClick={() => setValueChange("CREDENTIALS_NAMECOLUMNE")}
+            >
               Личные данные клиентов
             </button>
             <button
               className="admins-add__button  btn-text"
-              onClick={() => setValueChange("SALE_NAMECOLUMNE")}>
+              onClick={() => setValueChange("SALE_NAMECOLUMNE")}
+            >
               Продажи
             </button>
             <button
               className="admins-add__button  btn-text"
-              onClick={() => setValueChange("SALESARCHIVE_NAMECOLUMNE")}>
+              onClick={() => setValueChange("SALESARCHIVE_NAMECOLUMNE")}
+            >
               Архив продаж
             </button>
             <button
               className="admins-add__button  btn-text"
-              onClick={() => setValueChange("PRODUCT_NAMECOLUMNE")}>
+              onClick={() => setValueChange("PRODUCT_NAMECOLUMNE")}
+            >
               Продукты
             </button>
             <button
               className="admins-add__button  btn-text"
-              onClick={() => setValueChange("PRODUCTINFO_NAMECOLUMNE")}>
+              onClick={() => setValueChange("PRODUCTINFO_NAMECOLUMNE")}
+            >
               Характеристика продуктов
             </button>
             <button
               className="admins-add__button  btn-text"
-              onClick={() => setValueChange("CATEGORY_NAMECOLUMNE")}>
+              onClick={() => setValueChange("CATEGORY_NAMECOLUMNE")}
+            >
               Категории
             </button>
             <button
               className="admins-add__button  btn-text"
-              onClick={() => setValueChange("POINTISSUE_NAMECOLUMNE")}>
+              onClick={() => setValueChange("POINTISSUE_NAMECOLUMNE")}
+            >
               Пункты доставки
             </button>
             <button
               className="admins-add__button  btn-text"
-              onClick={() => setValueChange("SUPPLIERS_NAMECOLUMNE")}>
+              onClick={() => setValueChange("SUPPLIERS_NAMECOLUMNE")}
+            >
               Поставщики
             </button>
             <button
               className="admins-add__button  btn-text"
-              onClick={() => setValueChange("INVOICE_NAMECOLUMNE")}>
+              onClick={() => setValueChange("INVOICE_NAMECOLUMNE")}
+            >
               Накладная
             </button>
             <button
               className="admins-add__button  btn-text"
-              onClick={() => setValueChange("PRODUCTWAYBILL_NAMECOLUMNE")}>
+              onClick={() => setValueChange("PRODUCTWAYBILL_NAMECOLUMNE")}
+            >
               Товарная накладная
             </button>
           </div>

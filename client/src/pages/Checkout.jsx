@@ -4,8 +4,17 @@ import { observer } from "mobx-react-lite";
 
 import { Context } from "../index";
 import { LOGIN_ROUTE } from "../utils/consts";
+
 import { createSale, getNumberSale } from "../http/SaleAPI";
+
 import CheckoutAside from "../components/checkout/CheckoutAside";
+
+import { toast } from "react-toastify";
+
+import ToastContainers, {
+  TOAST_ERROR,
+  TOAST_SUCCESS,
+} from "../utils/params_toast";
 
 const Checkout = observer(() => {
   const { user, basket, listPromotionsUsers, listPointIssue } =
@@ -18,7 +27,7 @@ const Checkout = observer(() => {
 
   const createSales = () => {
     if (name === "" || name == null) {
-      alert("Некорректно введено имя");
+      toast.error("Некорректно введено имя!", TOAST_ERROR);
     } else {
       getNumberSale().then((data) => {
         const indexNumberSale = data[0]?.total;
@@ -36,24 +45,27 @@ const Checkout = observer(() => {
             indexNumberSale + 1
           ).then(
             (data) => {
-              alert("Заказ оформлен");
-
               setName("");
               setChangeInput(0);
               basket.setListBasket([]);
               basket.setTotalCost(0);
             },
-            (err) => {
-              alert("Ошибка заказа, обратитесь к администратору!\n\n" + err);
-            }
+            (err) =>
+              toast.error(
+                "Ошибка заказа, обратитесь к администратору!\n\n" + err,
+                TOAST_ERROR
+              )
           )
         );
+
+        toast.success("Заказ оформлен", TOAST_SUCCESS);
       });
     }
   };
 
   return (
     <section className="checkout">
+      <ToastContainers />
       <div className="container">
         <div className="checkout-wrapper">
           <h3 className="checkout-title">Оформление заказа</h3>
@@ -102,7 +114,8 @@ const Checkout = observer(() => {
                             <label
                               className="receiving-item__label"
                               id={index}
-                              onClick={onChangeInput}>
+                              onClick={onChangeInput}
+                            >
                               {itemPointIssue.addressPointIssue}
                               <br />
                               <span>

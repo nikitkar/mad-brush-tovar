@@ -7,6 +7,8 @@ import { Context } from "../index";
 import CardProduct from "../components/layout/card/CardProductMain";
 import { fetchProduct } from "../http/ProductAPI";
 
+import ToastContainers from "../utils/params_toast";
+
 const CategoryPage = observer(() => {
   const { id } = useParams();
   const { categories, categoriesByProducts } = useContext(Context);
@@ -44,6 +46,7 @@ const CategoryPage = observer(() => {
   return (
     <>
       <section className="categories">
+        <ToastContainers />
         <div className="container">
           <div className="categories-wrapper">
             <h3 className="categories-title">

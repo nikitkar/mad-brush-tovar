@@ -9,6 +9,9 @@ import {
   sortData_search,
 } from "../http/GetDataTableAPI";
 
+import { toast } from "react-toastify";
+import { TOAST_ERROR, TOAST_SUCCESS } from "../utils/params_toast";
+
 import {
   CATEGORY_NAMECOLUMNE,
   CLIENT_NAMECOLUMNE,
@@ -64,7 +67,7 @@ export default class DataTableStore {
       this._sortColumnIndex === index
         ? sortData(nameSort, item, this._sortMethod).then((data) => {
             if (data.err || data.sqlMessage)
-              return alert(data.err || data.sqlMessage);
+              return toast.error(data.err || data.sqlMessage, TOAST_ERROR);
             else saveDateResult(data);
           })
         : null
@@ -83,7 +86,7 @@ export default class DataTableStore {
             this._sortMethod
           ).then((data) => {
             if (data.err || data.sqlMessage)
-              return alert(data.err || data.sqlMessage);
+              return toast.error(data.err || data.sqlMessage, TOAST_ERROR);
             else saveDateResult(data);
           })
         : null
@@ -105,7 +108,10 @@ export default class DataTableStore {
             this._sortColumnIndex === index
               ? getDataUser_discount(item, this._sortMethod).then((data) => {
                   if (data.err || data.sqlMessage)
-                    return alert(data.err || data.sqlMessage);
+                    return toast.error(
+                      data.err || data.sqlMessage,
+                      TOAST_ERROR
+                    );
                   else this.setDataUser(data);
                 })
               : null
@@ -120,7 +126,10 @@ export default class DataTableStore {
                   this._sortMethod
                 ).then((data) => {
                   if (data.err || data.sqlMessage)
-                    return alert(data.err || data.sqlMessage);
+                    return toast.error(
+                      data.err || data.sqlMessage,
+                      TOAST_ERROR
+                    );
                   else this.setDataUser(data);
                 })
               : null
@@ -407,15 +416,18 @@ export default class DataTableStore {
 
   auxiliary_deleteRow(nameTable, nameColumn) {
     this._selectedInputs.map((selectedInput, index) => {
-      console.log(this.countDeleteRow);
       deletedRow(selectedInput, nameTable, nameColumn).then((data) =>
-        data.err ? alert("Ошибка при удалении записи") : null
+        data.err ? toast.error("Ошибка при удалении записи", TOAST_ERROR) : null
       );
+
       this.setCountDeleteRow(index + 1);
+
+      return null;
     });
 
     if (this.countDeleteRow > 0)
-      alert(`Запись удалена (${this.countDeleteRow})`);
+      toast.success(`Запись удалена (${this.countDeleteRow})`, TOAST_SUCCESS);
+
     this.refresh();
   }
 

@@ -8,6 +8,9 @@ import basketIcon from "../assets/images/icon/basket.svg";
 import { fetchOneProduct } from "../http/ProductAPI";
 
 import NotFound from "./NotFound";
+import { toast } from "react-toastify";
+
+import ToastContainers, { TOAST_SUCCESS } from "../utils/params_toast";
 
 //обертка, для того, чтобы видеть измениня (подписка)
 const DevicePage = observer(() => {
@@ -20,10 +23,15 @@ const DevicePage = observer(() => {
     fetchOneProduct(id).then((data) => setProducts(data));
   }, [id]);
 
-  const addItemBaskets = (idItem) => basket.addItem(idItem);
+  const addItemBaskets = (idItem) => {
+    basket.addItem(idItem);
+
+    toast.success("Товар добавлен в корзину", TOAST_SUCCESS);
+  };
 
   return (
     <section className="product">
+      <ToastContainers />
       <div className="container">
         <div className="product-wrapper">
           {products?.product ? (

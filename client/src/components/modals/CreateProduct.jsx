@@ -4,6 +4,8 @@ import { createProduct } from "../../http/ProductAPI";
 
 import DropDownMenu from "../dropDownMenu/DropDownMenu";
 import { Context } from "../../index";
+import { toast } from "react-toastify";
+import { TOAST_ERROR } from "../../utils/params_toast";
 
 const CreateProduct = observer(({ stateModal, onClick }) => {
   const { dataTables, categories } = useContext(Context);
@@ -40,7 +42,7 @@ const CreateProduct = observer(({ stateModal, onClick }) => {
     formData.append("info", JSON.stringify(info));
 
     createProduct(formData).then((data) => {
-      if (data.err) return alert(data.err);
+      if (data.err) return toast.error(data.err, TOAST_ERROR);
 
       setName("");
       setPrice(0);
@@ -71,7 +73,8 @@ const CreateProduct = observer(({ stateModal, onClick }) => {
           className === "createProduct-close"
         )
           onClick();
-      }}>
+      }}
+    >
       <div className="createProduct-body">
         <span className="createProduct-close"></span>
 
@@ -128,7 +131,8 @@ const CreateProduct = observer(({ stateModal, onClick }) => {
           <button
             className="createProduct-btn-info  btn-text"
             onClick={addInfo}
-            type="button">
+            type="button"
+          >
             Добавить свойство товара
           </button>
 
@@ -155,7 +159,8 @@ const CreateProduct = observer(({ stateModal, onClick }) => {
               <button
                 className="btn-text"
                 type="button"
-                onClick={() => removeInfo(i.number)}>
+                onClick={() => removeInfo(i.number)}
+              >
                 Удалить
               </button>
             </div>
@@ -164,7 +169,8 @@ const CreateProduct = observer(({ stateModal, onClick }) => {
           <button
             className="createProduct-button btn-text"
             type="button"
-            onClick={() => addProduct()}>
+            onClick={() => addProduct()}
+          >
             Добавить товар
           </button>
         </div>
