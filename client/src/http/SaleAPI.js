@@ -4,15 +4,17 @@ export const createSale = async (
   idClient,
   idProduct,
   priceSale,
-  countSale,
-  numberSale
+  numberSale,
+  countProductSale,
+  countAllSale
 ) => {
   const { data } = await $host.post("/api/sale", {
     idClient,
     idProduct,
     priceSale,
-    countSale,
+    countAllSale,
     numberSale,
+    countProductSale,
   });
 
   return data;

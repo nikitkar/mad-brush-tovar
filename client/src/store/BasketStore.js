@@ -47,7 +47,7 @@ export default class BasketStore {
   }
 
   setQuantityProducts() {
-    this._quantityProducts = 0;
+      this._quantityProducts = 0;
 
     if (this._listBaskets === []) return false;
     else

@@ -8,8 +8,9 @@ class SaleControlles {
       idClient,
       idProduct,
       priceSale,
-      countSale,
+      countAllSale,
       numberSale,
+      countProductSale,
       dataSale = new Date().toISOString().slice(0, 19).replace("T", " "),
     } = req.body;
 
@@ -20,22 +21,32 @@ class SaleControlles {
       idProduct == "" ||
       !priceSale ||
       priceSale == "" ||
-      !countSale ||
-      countSale == "" ||
+      !countAllSale ||
+      countAllSale == "" ||
       !numberSale ||
-      numberSale == ""
+      numberSale == "" ||
+      !countProductSale ||
+      countProductSale == ""
     )
       return next(
         ApiError.badRequest(
-          "Incorrect idClient or idProduct or priceSale or countSale or priceSale or numberSale"
+          "Incorrect idClient or idProduct or priceSale or countSale or priceSale or numberSale or countProductSale"
         )
       );
 
-    const query = `INSERT INTO sale(idClient, idProduct, dataSale, priceSale, countSale, numberSale) VALUES (?, ?, ?, ?, ?, ?)`;
+    const query = `INSERT INTO sale(idClient, idProduct, dataSale, priceSale, countAllSale, numberSale, countProductSale) VALUES (?, ?, ?, ?, ?, ?, ?)`;
 
     await db.query(
       query,
-      [idClient, idProduct, dataSale, priceSale, countSale, numberSale],
+      [
+        idClient,
+        idProduct,
+        dataSale,
+        priceSale,
+        countAllSale,
+        numberSale,
+        countProductSale,
+      ],
       (err, data) => {
         if (err) return res.json(err);
         else return res.json({ message: "Successful" });

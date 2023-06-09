@@ -41,8 +41,9 @@ const Checkout = observer(() => {
                 basket.totalCost *
                   (listPromotionsUsers.percentPromotionsUsers / 100)
             ).toFixed(2),
-            basket.quantityProducts,
-            indexNumberSale + 1
+            indexNumberSale + 1,
+            basketItem.count,
+            basket.quantityProducts
           ).then(
             (data) => {
               setName("");

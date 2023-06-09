@@ -18,9 +18,11 @@ export const ALLS_NAMECOLUMNE = {
     "idSale",
     "idClient",
     "idProduct",
-    "dataSale",
-    "priceSale",
     "numberSale",
+    "dataSale",
+    "countProductSale",
+    "countAllSale",
+    "priceSale",
   ],
   SALESARCHIVE_NAMECOLUMNE: ["idSalesArchive", "idSale", "statusSalesArchive"],
   PRODUCT_NAMECOLUMNE: [
