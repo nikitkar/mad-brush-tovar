@@ -6,7 +6,7 @@ import { Context } from "../../index";
 import { CHECKOUT_ROUTER } from "../../utils/consts";
 
 const BasketAside = observer(() => {
-  const { basket, listPromotionsUsers } = useContext(Context);
+  const { basket } = useContext(Context);
 
   return (
     <div className="basket-aside">

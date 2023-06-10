@@ -6,7 +6,9 @@ import { Context } from "../index";
 import TablesPage from "./TablesPage";
 
 import { getAll } from "../http/UserAPI";
+
 import ToastContainers from "../utils/params_toast";
+import { NAME_TABLES } from "../utils/consts_nameTables";
 
 const Admin = observer(() => {
   const { user, dataTables } = useContext(Context);
@@ -27,51 +29,9 @@ const Admin = observer(() => {
     dataTables.setSortMethod("ASC");
     dataTables.setSortColumnIndex(0);
 
-    switch (nametables) {
-      case "CLIENT_NAMECOLUMNE":
-        setNameTable("клиенты");
-        break;
-      case "CREDENTIALS_NAMECOLUMNE":
-        setNameTable("личные данные клиентов");
-        break;
-      case "SALE_NAMECOLUMNE":
-        setNameTable("продажи");
-        break;
-      case "SALESARCHIVE_NAMECOLUMNE":
-        setNameTable("архив продаж");
-        break;
-      case "PRODUCT_NAMECOLUMNE":
-        setNameTable("продукты");
-        break;
-      case "PRODUCTINFO_NAMECOLUMNE":
-        setNameTable("характеристика продуктов");
-        break;
-      case "CATEGORY_NAMECOLUMNE":
-        setNameTable("категории");
-        break;
-      case "POINTISSUE_NAMECOLUMNE":
-        setNameTable("пункты доставки");
-        break;
-      case "SUPPLIERS_NAMECOLUMNE":
-        setNameTable("поставщики");
-        break;
-      case "INVOICE_NAMECOLUMNE":
-        setNameTable("накладная");
-        break;
-      case "PRODUCTWAYBILL_NAMECOLUMNE":
-        setNameTable("товарная-накладная");
-        break;
-      case "Histogram":
-        setNameTable("столбчатая диаграмма");
-        break;
-      case "PieChart":
-        setNameTable("круговая диаграмма");
-        break;
-
-      default:
-        setNameTable("");
-        break;
-    }
+    NAME_TABLES.map((nameTable) =>
+      nametables === nameTable.name_en ? setNameTable(nameTable.name_ru) : null
+    );
   };
 
   return (
@@ -80,72 +40,15 @@ const Admin = observer(() => {
       <div className="container">
         <div className="admins-wrapper">
           <div className="admins-add">
-            <button
-              className="admins-add__button  btn-text"
-              onClick={() => setValueChange("CLIENT_NAMECOLUMNE")}
-            >
-              Клиенты
-            </button>
-            <button
-              className="admins-add__button  btn-text"
-              onClick={() => setValueChange("CREDENTIALS_NAMECOLUMNE")}
-            >
-              Личные данные клиентов
-            </button>
-            <button
-              className="admins-add__button  btn-text"
-              onClick={() => setValueChange("SALE_NAMECOLUMNE")}
-            >
-              Продажи
-            </button>
-            <button
-              className="admins-add__button  btn-text"
-              onClick={() => setValueChange("SALESARCHIVE_NAMECOLUMNE")}
-            >
-              Архив продаж
-            </button>
-            <button
-              className="admins-add__button  btn-text"
-              onClick={() => setValueChange("PRODUCT_NAMECOLUMNE")}
-            >
-              Продукты
-            </button>
-            <button
-              className="admins-add__button  btn-text"
-              onClick={() => setValueChange("PRODUCTINFO_NAMECOLUMNE")}
-            >
-              Характеристика продуктов
-            </button>
-            <button
-              className="admins-add__button  btn-text"
-              onClick={() => setValueChange("CATEGORY_NAMECOLUMNE")}
-            >
-              Категории
-            </button>
-            <button
-              className="admins-add__button  btn-text"
-              onClick={() => setValueChange("POINTISSUE_NAMECOLUMNE")}
-            >
-              Пункты доставки
-            </button>
-            <button
-              className="admins-add__button  btn-text"
-              onClick={() => setValueChange("SUPPLIERS_NAMECOLUMNE")}
-            >
-              Поставщики
-            </button>
-            <button
-              className="admins-add__button  btn-text"
-              onClick={() => setValueChange("INVOICE_NAMECOLUMNE")}
-            >
-              Накладная
-            </button>
-            <button
-              className="admins-add__button  btn-text"
-              onClick={() => setValueChange("PRODUCTWAYBILL_NAMECOLUMNE")}
-            >
-              Товарная накладная
-            </button>
+            {NAME_TABLES.map((nameTable, index) => (
+              <button
+                className="admins-add__button  btn-text"
+                onClick={() => setValueChange(nameTable.name_en)}
+                key={index}
+              >
+                {nameTable.name_ru}
+              </button>
+            ))}
           </div>
 
           <p>

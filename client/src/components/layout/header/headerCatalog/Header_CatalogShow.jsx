@@ -6,7 +6,6 @@ import { fetchCategory } from "../../../../http/CategoryAPI";
 import { fetchAllProduct, fetchProduct } from "../../../../http/ProductAPI";
 
 import CatalogItem from "./CatalogItem";
-import ProductItem from "./ProductItem";
 
 const HeaderCatalogShow = observer(() => {
   const { products, categories, isActiveHeader, productsAll } =

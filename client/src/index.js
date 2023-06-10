@@ -10,6 +10,7 @@ import BasketStore from "./store/BasketStore";
 import PromotionsUsersStore from "./store/PromotionsUsersStore";
 import PointIssueStore from "./store/PointIssueStore";
 import DataTableStore from "./store/DataTableStore";
+import Table_BtnAddingData_VisibleModalStore from "./store/Table_BtnAddingData_VisibleModalStore";
 
 export const Context = createContext(null);
 
@@ -27,7 +28,8 @@ root.render(
       basket: new BasketStore(),
       listPromotionsUsers: new PromotionsUsersStore(),
       listPointIssue: new PointIssueStore(),
-      dataTables: new DataTableStore(),
+            dataTables: new DataTableStore(),
+      BtnAdding_VisibleModal: new Table_BtnAddingData_VisibleModalStore(),
       authModal: true,
     }}>
     <App />

@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 import { Context } from "../../index";
 
 const CheckoutAside = observer((props) => {
-  const { basket, productsAll, listPromotionsUsers } = useContext(Context);
+  const { basket, productsAll } = useContext(Context);
 
   useEffect(() => {
     basket.setTotalCost(0);
