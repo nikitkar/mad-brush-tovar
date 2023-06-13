@@ -6,9 +6,6 @@ export default class ProductStore {
     this._categories = [];
     this._allProducts = [];
 
-    this._selectedCategory = "";
-    this._selectedBrand = {};
-
     makeAutoObservable(this);
   }
 
@@ -24,10 +21,6 @@ export default class ProductStore {
     this._categories = category;
   }
 
-  setSelectedCategories(category) {
-    this._selectedCategory = category;
-  }
-
   get products() {
     return this._products;
   }
@@ -38,9 +31,5 @@ export default class ProductStore {
 
   get categories() {
     return this._categories;
-  }
-
-  get selectedCategory() {
-    return this._selectedCategory;
   }
 }

@@ -4,34 +4,44 @@ import { db } from "../MySQL.js";
 
 class ProductWaybillController {
   async create(req, res, next) {
-    const { idInvice, idCategory, nameProduct, countProducts } = req.body;
+    const { idInvice, idProduct, numberProduct_waybill, countProduct_waybill } =
+      req.body;
 
     if (
       !idInvice ||
       idInvice == "" ||
-      !idCategory ||
-      idCategory == "" ||
-      !nameProduct ||
-      nameProduct == "" ||
-      !countProducts ||
-      countProducts == ""
+      !idProduct ||
+      idProduct == "" ||
+      !numberProduct_waybill ||
+      numberProduct_waybill == "" ||
+      !countProduct_waybill ||
+      countProduct_waybill == ""
     )
       return next(
         ApiError.badRequest(
-          "Incorrect idInvice or idCategory or nameProduct or countProducts"
+          "Incorrect idInvice, idProduct, numberProduct_waybill, countProduct_waybill"
         )
       );
 
-    const query = `INSERT INTO productWaybill(idInvice, idCategory, nameProduct, countProducts) VALUES (?, ?, '?', ?)`;
+    const query = `INSERT INTO productWaybill(idInvice, idProduct, numberProduct_waybill, countProduct_waybill) VALUES (?, ?, ?, ?)`;
 
     await db.query(
       query,
-      [idInvice, idCategory, nameProduct, countProducts],
+      [idInvice, idProduct, numberProduct_waybill, countProduct_waybill],
       (err, data) => {
         if (err) return res.json(err);
         else return res.json({ message: "Successful" });
       }
     );
+  }
+
+  async getMaxNumber(req, res) {
+    const query = `SELECT MAX(numberProduct_waybill) AS total FROM numberProduct_waybill`;
+
+    await db.query(query, (err, data) => {
+      if (err) return res.json(err);
+      else return res.json(data);
+    });
   }
 
   async getAll(req, res) {

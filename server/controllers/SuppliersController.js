@@ -8,7 +8,7 @@ class SuppliersController {
 
     if (!name || name == "") return next(ApiError.badRequest("Incorrect name"));
 
-    const query = `INSERT INTO suppliers(suppliers) VALUES ('?')`;
+    const query = `INSERT INTO suppliers(nameSuppliers) VALUES (?)`;
 
     await db.query(query, name, (err, data) => {
       if (err) return res.json(err);

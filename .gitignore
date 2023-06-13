@@ -53,3 +53,5 @@ yarn-error.log*
 **/static
 
 mad_brush_tovar.sql
+
+*.txt

@@ -21,7 +21,7 @@ class SalesArchiveController {
         )
       );
 
-    const query = `INSERT INTO salesArchive(idSale, statusSalesArchive) VALUES (?, '?')`;
+    const query = `INSERT INTO salesArchive(idSale, statusSalesArchive) VALUES (?, ?)`;
 
     await db.query(query, [idSale, statusSalesArchive], (err, data) => {
       if (err) return res.json(err);

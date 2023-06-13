@@ -35,7 +35,7 @@ class ProductController {
         if (err) next(ApiError.internal(err.message));
       });
 
-      const createProductQuery = `INSERT INTO product(idCategory, idSubcategories, nameProduct, priceProduct, imgProduct) VALUES (?, ?, '?', ?, ?, '?')`;
+      const createProductQuery = `INSERT INTO product(idCategory, idSubcategories, nameProduct, priceProduct, imgProduct) VALUES (?, ?, ?, ?, ?, ?)`;
 
       await db.query(
         createProductQuery,

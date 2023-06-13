@@ -10,12 +10,14 @@ import Footer from "./components/layout/footer/Footer";
 
 import { check } from "./http/UserAPI";
 import { fetchPointIssue } from "./http/PointIssueAPI";
+import { fetchSuppliers } from "./http/SuppliersAPI";
 
 import "./assets/sass/app.scss";
+import { fetchInvoice } from "./http/InvoiceAPI";
+import { fetchAllProduct } from "./http/ProductAPI";
 
 const App = observer(() => {
-  const { user, basket, listPointIssue } =
-    useContext(Context);
+  const { user, basket, dataTables } = useContext(Context);
 
   useEffect(() => {
     check().then((data) => {
@@ -23,11 +25,15 @@ const App = observer(() => {
       user.setIsAuth(true);
       user.setRole(data.role);
       user.setId(data.id);
-      fetchPointIssue().then((data) => listPointIssue.setListPointIssue(data));
+
+      fetchPointIssue().then((data) => dataTables.setDataPointIssue(data));
+      fetchSuppliers().then((data) => dataTables.setDataSuppliers(data));
+      fetchInvoice().then((data) => dataTables.setDataInvoice(data));
+      fetchAllProduct().then((data) => dataTables.setDataProduct(data));
     });
 
     basket.setListBasket(basket.localStorageListBasket);
-  }, [basket, listPointIssue, user]);
+  }, [basket, dataTables, user]);
 
   return (
     <BrowserRouter>

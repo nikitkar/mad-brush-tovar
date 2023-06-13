@@ -25,9 +25,9 @@ class UserController {
     if (!login || !password)
       return next(ApiError.badRequest("Incorrect login or password"));
 
-    const candidateQuert = `SELECT * FROM credentials WHERE loginClient='${login}'`;
+    const candidateQuert = `SELECT * FROM credentials WHERE loginClient=?`;
     const candidate = await new Promise((resolve) => {
-      db.query(candidateQuert, (err, data) => {
+      db.query(candidateQuert, login, (err, data) => {
         if (err) return res.json(err);
         else return resolve(data);
       });
@@ -40,17 +40,25 @@ class UserController {
 
     const hashPassword = await bcrypt.hash(password, 5);
 
-    const clientQuery = `INSERT INTO client(nameClient, emailClient, telephoneClient, addressClient) VALUES ('${name}','${email}','${telephone}','${address}');`;
-    const clientAUTHQuery = `INSERT INTO credentials(idClient, loginClient, passwordClient, roleClient) VALUES ((SELECT max(idClient) FROM client), '${login}', '${hashPassword}', '${role}');`;
+    const clientQuery = `INSERT INTO client(nameClient, emailClient, telephoneClient, addressClient) VALUES (?, ?, ?, ?);`;
+    const clientAUTHQuery = `INSERT INTO credentials(idClient, loginClient, passwordClient, roleClient) VALUES ((SELECT max(idClient) FROM client), ?, ?, ?);`;
     const idClientQuery = `SELECT max(idClient) as idClient FROM client`;
 
     try {
-      await db.query(clientQuery, (err, data) => {
-        if (err) return res.json("clientQuery error - " + err);
-      });
-      await db.query(clientAUTHQuery, (err, data) => {
-        if (err) return res.json("clientAUTHQuery error - " + err);
-      });
+      await db.query(
+        clientQuery,
+        [name, email, telephone, address],
+        (err, data) => {
+          if (err) return res.json("clientQuery error - " + err);
+        }
+      );
+      await db.query(
+        clientAUTHQuery,
+        [login, hashPassword, role],
+        (err, data) => {
+          if (err) return res.json("clientAUTHQuery error - " + err);
+        }
+      );
     } catch (e) {
       ApiError.badRequest("Error");
     }
@@ -74,9 +82,9 @@ class UserController {
   async login(req, res, next) {
     const { login, password } = req.body;
 
-    const userQuery = `SELECT * FROM credentials WHERE loginClient='${login}'`;
+    const userQuery = `SELECT * FROM credentials WHERE loginClient=?`;
     let user = await new Promise((resolve) => {
-      db.query(userQuery, (err, data) => {
+      db.query(userQuery, login, (err, data) => {
         if (err) return res.json(err);
         else return resolve(data);
       });

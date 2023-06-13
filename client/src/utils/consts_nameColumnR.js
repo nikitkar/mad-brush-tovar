@@ -40,7 +40,8 @@ export const ALLS_NAMECOLUMNR = {
   PRODUCTWAYBILL_NAMECOLUMN: [
     "id",
     "id накладной",
-    "Название товара",
+    "id продукта",
+    "Номер документа",
     "Количество товара",
   ],
 };
@@ -93,6 +94,7 @@ export const INVOICE_NAMECOLUMNR = [
 export const PRODUCTWAYBILL_NAMECOLUMNR = [
   "id",
   "id накладной",
-  "Название товара",
+  "id продукта",
+  "Номер документа",
   "Количество товара",
 ];

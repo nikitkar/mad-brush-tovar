@@ -8,10 +8,11 @@ import { fetchAllProduct, fetchProduct } from "../../../../http/ProductAPI";
 import CatalogItem from "./CatalogItem";
 
 const HeaderCatalogShow = observer(() => {
-  const { products, categories, isActiveHeader, productsAll } =
+  const { dataTables, products, categories, isActiveHeader, productsAll } =
     useContext(Context);
 
   useEffect(() => {
+    fetchCategory().then((data) => dataTables.setDataCategory(data));
     fetchCategory().then((data) => categories.setCategory(data));
     fetchProduct().then((data) => {
       products.setProduct(data);
@@ -19,7 +20,7 @@ const HeaderCatalogShow = observer(() => {
     fetchAllProduct().then((data) => {
       productsAll.setAllProducts(data);
     });
-  }, [categories, products, productsAll]);
+  }, [categories, dataTables, products, productsAll]);
 
   return (
     <div className="catalog">

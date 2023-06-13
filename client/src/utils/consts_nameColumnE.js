@@ -52,6 +52,7 @@ export const ALLS_NAMECOLUMNE = {
     "idProductWaybill",
     "idInvoice",
     "idProduct",
+    "numberProduct_waybill",
     "countProduct_waybill",
   ],
 };
@@ -120,5 +121,6 @@ export const PRODUCTWAYBILL_NAMECOLUMNE = [
   "idProductWaybill",
   "idInvoice",
   "idProduct",
+  "numberProduct_waybill",
   "countProduct_waybill",
 ];

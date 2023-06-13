@@ -8,7 +8,7 @@ class InvoiceController {
       idSuppliers,
       idPointIssue,
       priceInvoice,
-      dateDeliveryInvoice = Date.now(),
+      dateDeliveryInvoice,
       countInvoice,
     } = req.body;
 
@@ -28,7 +28,7 @@ class InvoiceController {
         )
       );
 
-    const query = `INSERT INTO invoice(idSuppliers, idPointIssue, priceInvoice, dateDeliveryInvoice, countInvoice) VALUES (?, ?, ?, '?', ?)`;
+    const query = `INSERT INTO invoice(idSuppliers, idPointIssue, priceInvoice, dateDeliveryInvoice, countInvoice) VALUES (?, ?, ?, ?, ?)`;
 
     await db.query(
       query,

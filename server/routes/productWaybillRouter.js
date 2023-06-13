@@ -10,6 +10,10 @@ productWaybillRouter.post(
   CheckMiddleware("ADMIN"),
   productWaybillController.create
 );
+productWaybillRouter.get(
+  "/numberProductWaybill",
+  productWaybillController.getMaxNumber
+);
 productWaybillRouter.get("/", productWaybillController.getAll);
 
 export { productWaybillRouter };

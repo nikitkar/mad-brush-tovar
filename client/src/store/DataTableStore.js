@@ -458,6 +458,31 @@ export default class DataTableStore {
     }
   }
 
+  dropDownMenuList(store) {
+    switch (store) {
+      case "categories":
+        return this.dataCategory;
+
+      case "suppliers":
+        return this.dataSuppliers;
+
+      case "pointIssue":
+        return this.dataPointIssue;
+
+      case "invoice":
+        return this.dataInvoice;
+
+      case "product":
+        return this.dataProduct;
+
+      case "productwaybill":
+        return this.dataProductWaybill;
+
+      default:
+        return null;
+    }
+  }
+
   setDataUser(data) {
     this._dataUser = data;
   }

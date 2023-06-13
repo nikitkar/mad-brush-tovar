@@ -32,6 +32,9 @@
 
     &.is_active {
       display: flex;
+
+      max-height: 180px;
+      overflow: auto;
     }
   }
 
