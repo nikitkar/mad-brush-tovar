@@ -8,10 +8,10 @@ import { ALLS_NAMECOLUMNE } from "../../../utils/consts_nameColumnE";
 
 const RenderSelectOption = observer(({ nameTable }) => {
   const { dataTables } = useContext(Context);
-  const matchingColumns = ALLS_NAMECOLUMNR[nameTable.slice(0, -1)];
+  const matchingColumns = ALLS_NAMECOLUMNR[nameTable?.slice(0, -1)];
 
   const auxiliary_renderOption = () =>
-    matchingColumns.map((item, index) => (
+    matchingColumns?.map((item, index) => (
       <option
         key={index}
         className="mui-toolbar-search-option"

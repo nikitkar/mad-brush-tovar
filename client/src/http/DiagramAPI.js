@@ -1,13 +1,13 @@
 import { $authHost } from "./Http";
 
-export const getPieChart = async () => {
-  const { data } = await $authHost.get("/api/diagram/pieChart");
+export const getClientD = async () => {
+  const { data } = await $authHost.get("/api/diagram/clientD");
 
   return data;
 };
 
-export const getHistogram = async () => {
-  const { data } = await $authHost.get("/api/diagram/histogram");
+export const getProductD = async () => {
+  const { data } = await $authHost.get("/api/diagram/productD");
 
   return data;
 };

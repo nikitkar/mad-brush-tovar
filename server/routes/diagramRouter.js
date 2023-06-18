@@ -7,14 +7,14 @@ const diagramRouter = new Router();
 const diagramController = new DiagramController();
 
 diagramRouter.get(
-  "/pieChart",
+  "/clientD",
   CheckMiddleware("ADMIN"),
-  diagramController.pieChart
+  diagramController.clientD
 );
 diagramRouter.get(
-  "/histogram",
+  "/productD",
   CheckMiddleware("ADMIN"),
-  diagramController.histogram
+  diagramController.productD
 );
 diagramController;
 export { diagramRouter };

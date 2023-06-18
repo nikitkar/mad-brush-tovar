@@ -28,10 +28,11 @@ root.render(
       basket: new BasketStore(),
       listPromotionsUsers: new PromotionsUsersStore(),
       listPointIssue: new PointIssueStore(),
-            dataTables: new DataTableStore(),
+      dataTables: new DataTableStore(),
       BtnAdding_VisibleModal: new Table_BtnAddingData_VisibleModalStore(),
       authModal: true,
-    }}>
+    }}
+  >
     <App />
   </Context.Provider>
 );

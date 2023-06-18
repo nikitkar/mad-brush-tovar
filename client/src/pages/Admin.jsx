@@ -4,6 +4,7 @@ import { observer } from "mobx-react-lite";
 import { Context } from "../index";
 
 import TablesPage from "./TablesPage";
+import Analytics from "../components/analytics/Analytics";
 
 import { getAll } from "../http/UserAPI";
 
@@ -20,6 +21,13 @@ const Admin = observer(() => {
   }, [user]);
 
   const setValueChange = (nametables) => {
+    if (nametables === "analytics") {
+      setValue(nametables);
+      setNameTable(nametables);
+
+      return null;
+    }
+
     setValue(nametables);
     setNameTable(nametables);
 
@@ -40,6 +48,12 @@ const Admin = observer(() => {
       <div className="container">
         <div className="admins-wrapper">
           <div className="admins-add">
+            <button
+              className="admins-add__button  btn-text"
+              onClick={() => setValueChange("analytics")}
+            >
+              Аналитика продукции
+            </button>
             {NAME_TABLES.map((nameTable, index) => (
               <button
                 className="admins-add__button  btn-text"
@@ -52,15 +66,19 @@ const Admin = observer(() => {
           </div>
 
           <p>
-            {value === "Histogram" || value === "PieChart"
-              ? "Вы находитесь на диаграмме - " + nameTable
+            {value === "analytics"
+              ? "Вы находитесь на странице - аналитика компании"
               : value === ""
               ? null
               : "Вы находитесь на таблице - " + nameTable}
           </p>
 
           <div className="admins-body">
-            <TablesPage nameTable={value} />
+            {value === "analytics" ? (
+              <Analytics />
+            ) : value === "" ? null : (
+              <TablesPage nameTable={value} />
+            )}
           </div>
         </div>
       </div>
