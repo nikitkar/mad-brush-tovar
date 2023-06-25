@@ -13,13 +13,13 @@ class SubcategoriesController {
         !name || name == "" &&
         !img || img == ""
     )
-      return next(ApiError.badRequest("Incorrect name or img or idCategory"));
+      return next(ApiError.badRequest("Заполните все поля!"));
 
     const query = `INSERT INTO subcategories(idCategory, nameSubcategories, imgSubcategories) VALUES (?, ?, ?)`;
 
     await db.query(query, [idCategory, nameSubcategories, imgSubcategories], (err, data) => {
       if (err) return res.json(err);
-      else return res.json({ message: "Successful" });
+      else return res.json({ message: "Успешно" });
     });
   }
 

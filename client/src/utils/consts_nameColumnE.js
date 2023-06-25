@@ -45,9 +45,9 @@ export const ALLS_NAMECOLUMNE = {
     "idInvoice",
     "idSuppliers",
     "idPointIssue",
+    "priceInvoice",
     "dateDeliveryInvoice",
     "countInvoice",
-    "priceInvoice",
   ],
   PRODUCTWAYBILL_NAMECOLUMNE: [
     "idProductWaybill",
@@ -57,6 +57,7 @@ export const ALLS_NAMECOLUMNE = {
     "countProduct_waybill",
   ],
 };
+
 export const CLIENT_NAMECOLUMNE = [
   "idClient",
   "nameClient",
@@ -100,11 +101,7 @@ export const PRODUCTINFO_NAMECOLUMNE = [
   "idProduct",
   "descriptionProduct",
 ];
-export const CATEGORY_NAMECOLUMNE = [
-  "idCategory",
-  "nameCategory",
-  "imgCategory",
-];
+export const CATEGORY_NAMECOLUMNE = ["idCategory", "nameCategory"];
 export const POINTISSUE_NAMECOLUMNE = [
   "idPointIssue",
   "addressPointIssue",
@@ -115,9 +112,9 @@ export const INVOICE_NAMECOLUMNE = [
   "idInvoice",
   "idSuppliers",
   "idPointIssue",
+  "priceInvoice",
   "dateDeliveryInvoice",
   "countInvoice",
-  "priceInvoice",
 ];
 export const PRODUCTWAYBILL_NAMECOLUMNE = [
   "idProductWaybill",

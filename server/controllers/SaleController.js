@@ -28,11 +28,7 @@ class SaleControlles {
       !countProductSale ||
       countProductSale == ""
     )
-      return next(
-        ApiError.badRequest(
-          "Incorrect idClient or idProduct or priceSale or countSale or priceSale or numberSale or countProductSale"
-        )
-      );
+      return next(ApiError.badRequest("Заполните все поля!"));
 
     const query = `INSERT INTO sale(idClient, idProduct, dataSale, priceSale, countAllSale, numberSale, countProductSale) VALUES (?, ?, ?, ?, ?, ?, ?)`;
 
@@ -49,7 +45,7 @@ class SaleControlles {
       ],
       (err, data) => {
         if (err) return res.json(err);
-        else return res.json({ message: "Successful" });
+        else return res.json({ message: "Успешно" });
       }
     );
   }

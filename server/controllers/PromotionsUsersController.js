@@ -12,15 +12,13 @@ class PromotionsUsersController {
       !percentPromotionsUsers ||
       percentPromotionsUsers == ""
     )
-      return next(
-        ApiError.badRequest("Incorrect idClient or percentPromotionsUsers")
-      );
+      return next(ApiError.badRequest("Заполните все поля!"));
 
     const query = `INSERT INTO promotionsUsers(idClient, percentPromotionsUsers) VALUES (?, ?)`;
 
     await db.query(query, [idClient, percentPromotionsUsers], (err, data) => {
       if (err) return res.json(err);
-      else return res.json({ message: "Successful" });
+      else return res.json({ message: "Успешно" });
     });
   }
 

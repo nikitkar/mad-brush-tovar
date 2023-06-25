@@ -6,13 +6,13 @@ class SuppliersController {
   async create(req, res, next) {
     const { name } = req.body;
 
-    if (!name || name == "") return next(ApiError.badRequest("Incorrect name"));
+    if (!name || name == "") return next(ApiError.badRequest("Заполните все поля!"));
 
     const query = `INSERT INTO suppliers(nameSuppliers) VALUES (?)`;
 
     await db.query(query, name, (err, data) => {
       if (err) return res.json(err);
-      else return res.json({ message: "Successful" });
+      else return res.json({ message: "Успешно" });
     });
   }
 

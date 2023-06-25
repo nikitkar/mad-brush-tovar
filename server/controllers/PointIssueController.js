@@ -7,13 +7,13 @@ class PointIssueController {
     const { address, workingTime } = req.body;
 
     if (!address || address == "" || !workingTime || workingTime == "")
-      return next(ApiError.badRequest("Incorrect address or workingTime"));
+      return next(ApiError.badRequest("Заполните все поля!"));
 
     const query = `INSERT INTO pointIssue(addressPointIssue, workingHousePointIssue) VALUES (?, ?)`;
 
     await db.query(query, [address, workingTime], (err, data) => {
       if (err) return res.json(err);
-      else return res.json({ message: "Successful" });
+      else return res.json({ message: "Успешно" });
     });
   }
 

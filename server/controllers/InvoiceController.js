@@ -24,7 +24,7 @@ class InvoiceController {
     )
       return next(
         ApiError.badRequest(
-          "Incorrect idSuppliers oridPointIssue or priceInvoice or countInvoice"
+          "Заполните все поля!"
         )
       );
 
@@ -41,7 +41,7 @@ class InvoiceController {
       ],
       (err, data) => {
         if (err) return res.json(err);
-        else return res.json({ message: "Successful" });
+        else return res.json({ message: "Успешно" });
       }
     );
   }

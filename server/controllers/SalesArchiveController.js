@@ -15,17 +15,13 @@ class SalesArchiveController {
       !statusSalesArchive ||
       statusSalesArchive == ""
     )
-      return next(
-        ApiError.badRequest(
-          "Incorrect idSale or statusSalesArchive"
-        )
-      );
+      return next(ApiError.badRequest("Заполните все поля!"));
 
     const query = `INSERT INTO salesArchive(idSale, statusSalesArchive) VALUES (?, ?)`;
 
     await db.query(query, [idSale, statusSalesArchive], (err, data) => {
       if (err) return res.json(err);
-      else return res.json({ message: "Successful" });
+      else return res.json({ message: "Успешно" });
     });
   }
 

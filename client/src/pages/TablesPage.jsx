@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { observer } from "mobx-react-lite";
 import { Confirm } from "semantic-ui-react";
 
@@ -14,17 +14,21 @@ const TablesPage = observer(({ nameTable }) => {
   const { dataTables, editDataRow } = useContext(Context);
 
   const nameTabel_split = nameTable.split("_")[0].toLowerCase();
-  const [state, setState] = useState(false);
 
-  const open = () => setState(true);
-  const close = () => setState(false);
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+
+  const openDeleteModal = () => setDeleteModalOpen(true);
+  const closeDeleteModal = () => setDeleteModalOpen(false);
 
   const deleteRow = () => {
     dataTables.deleteRow();
-    close();
+    closeDeleteModal();
+  };
+
+  useEffect(() => {
     dataTables.refresh();
     dataTables.setSelectedInputs([]);
-  };
+  }, [dataTables]);
 
   return (
     <div className="mui-main">
@@ -38,13 +42,13 @@ const TablesPage = observer(({ nameTable }) => {
                     Элементов выделено -{" "}
                     <span>{dataTables.selectedInputs.length}</span>
                   </p>
-                  <button className="btn-text" onClick={open}>
+                  <button className="btn-text" onClick={openDeleteModal}>
                     Удалить
                   </button>
                   <Confirm
                     content="Уверены, что хотите удалить?"
-                    open={state}
-                    onCancel={close}
+                    open={deleteModalOpen}
+                    onCancel={closeDeleteModal}
                     onConfirm={deleteRow}
                   />
                 </div>

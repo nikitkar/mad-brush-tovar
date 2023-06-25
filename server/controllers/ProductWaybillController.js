@@ -17,11 +17,7 @@ class ProductWaybillController {
       !countProduct_waybill ||
       countProduct_waybill == ""
     )
-      return next(
-        ApiError.badRequest(
-          "Incorrect idInvice, idProduct, numberProduct_waybill, countProduct_waybill"
-        )
-      );
+      return next(ApiError.badRequest("Заполните все поля!"));
 
     const query = `INSERT INTO productWaybill(idInvice, idProduct, numberProduct_waybill, countProduct_waybill) VALUES (?, ?, ?, ?)`;
 
@@ -30,7 +26,7 @@ class ProductWaybillController {
       [idInvice, idProduct, numberProduct_waybill, countProduct_waybill],
       (err, data) => {
         if (err) return res.json(err);
-        else return res.json({ message: "Successful" });
+        else return res.json({ message: "Успешно" });
       }
     );
   }

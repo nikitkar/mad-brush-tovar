@@ -23,7 +23,7 @@ class UserController {
     } = req.body;
 
     if (!login || !password)
-      return next(ApiError.badRequest("Incorrect login or password"));
+      return next(ApiError.badRequest("Заполните все поля!"));
 
     const candidateQuert = `SELECT * FROM credentials WHERE loginClient=?`;
     const candidate = await new Promise((resolve) => {
@@ -34,9 +34,9 @@ class UserController {
     });
 
     if (candidate.length != 0)
-      return next(
-        ApiError.badRequest("A user with this username already exists")
-      );
+      return res.json({
+        err: "Пользователь с таким логином уже существует",
+      });
 
     const hashPassword = await bcrypt.hash(password, 5);
 
@@ -85,20 +85,19 @@ class UserController {
     const userQuery = `SELECT * FROM credentials WHERE loginClient=?`;
     let user = await new Promise((resolve) => {
       db.query(userQuery, login, (err, data) => {
-        if (err) return res.json(err);
+        if (err) return res.json({ err: err });
         else return resolve(data);
       });
     });
 
     if (Object.keys(user).length == 0)
-      return next(ApiError.internal("User not found"));
+      return res.json({ err: "Пользователь не найден" });
 
     let comparePassword = bcrypt.compareSync(
       password,
       user[0]["passwordClient"]
     );
-    if (!comparePassword)
-      return next(ApiError.internal("Invalid password specified"));
+    if (!comparePassword) return res.json({ err: "Указан неверный пароль" });
 
     const token = generateJwt(
       user[0]["idClient"],

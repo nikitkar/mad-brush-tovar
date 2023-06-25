@@ -24,11 +24,7 @@ class ProductController {
       const { img } = req.files;
 
       if (!name || !price || !count || !info || !idCategory || !img)
-        return next(
-          ApiError.badRequest(
-            "Incorrect name / price / info / idCategory / img / idSubcategories"
-          )
-        );
+        return next(ApiError.badRequest("Заполните все поля!"));
 
       let fileName = uuidv4() + ".jpg";
       img.mv(path.resolve(__dirname, "..", "static", fileName), (err) => {

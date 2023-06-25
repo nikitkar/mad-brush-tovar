@@ -9,13 +9,13 @@ class CategoryController {
 
     // проверка на валидность
     if (!name || name == "")
-      return next(ApiError.badRequest("Incorrect name"));
+      return next(ApiError.badRequest("Заполните поле"));
 
     const query = `INSERT INTO category(nameCategory) VALUES (?)`;
 
     await db.query(query, name, (err, data) => {
       if (err) return res.json(err);
-      else return res.json({ message: "Successful" });
+      else return res.json({ message: "Успешно" });
     });
   }
 

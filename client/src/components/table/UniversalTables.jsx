@@ -1,5 +1,4 @@
 import { useContext, useEffect } from "react";
-import { autorun } from "mobx";
 import { observer } from "mobx-react-lite";
 
 import { Context } from "../../index";
@@ -19,7 +18,7 @@ const UniversalTables = observer(({ nameTable }) => {
       case "CREDENTIALS_NAMECOLUMNE":
         getDataTable(name).then((data) => {
           dataTables.setDataCredentials(data);
-          autorun(() => dataTables.refresh());
+          dataTables.refresh();
         });
         break;
       case "SALE_NAMECOLUMNE":

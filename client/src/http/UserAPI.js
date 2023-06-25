@@ -20,7 +20,7 @@ export const registration = async (
       address,
     });
 
-    if (data.err) return { err: "Ошибка, попробуйте ещё раз" };
+    if (data.err) return { err: data.err };
 
     if (data.token) localStorage.setItem("token", data.token);
     else localStorage.setItem("token", data);
@@ -37,7 +37,7 @@ export const login = async (login, password) => {
     password,
   });
 
-  if (data.err) return { err: "Ошибка, попробуйте ещё раз" };
+  if (data.err) return { err: data.err };
 
   localStorage.setItem("token", data.token);
 
