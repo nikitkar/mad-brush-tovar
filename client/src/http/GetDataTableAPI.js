@@ -27,8 +27,16 @@ export const searchData = async (nameTable, nameColumn, content) => {
     params: {
       nameTable,
       nameColumn,
-      content
+      content,
     },
+  });
+
+  return data;
+};
+
+export const editData = async (nameTable, arrDataContent, objIdValue) => {
+  const { data } = await $authHost.get("/api/getDataTable/edit", {
+    params: { nameTable, arrDataContent, objIdValue },
   });
 
   return data;

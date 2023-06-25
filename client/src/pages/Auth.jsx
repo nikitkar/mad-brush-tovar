@@ -1,13 +1,18 @@
 import { useState, useContext } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 
-
 import { observer } from "mobx-react-lite";
 
 import { REGISTRATION_ROUTE, LOGIN_ROUTE, HOME_ROUTE } from "../utils/consts";
 import { login, registration } from "../http/UserAPI";
 import { Context } from "../index";
 import InputPass from "../components/input/InputPass";
+
+import { toast } from "react-toastify";
+import ToastContainers, {
+  TOAST_ERROR,
+  TOAST_SUCCESS,
+} from "../utils/params_toast";
 
 const Auth = observer(() => {
   const { user } = useContext(Context);
@@ -75,22 +80,27 @@ const Auth = observer(() => {
         );
       else data = await login(loginInput, passwordInput);
 
-      if (data === undefined) return "check error - " + data;
+      if (data.err) return toast.error(data.err, TOAST_ERROR);
 
       user.setUser(data);
       user.setIsAuth(true);
       user.setRole(data.role);
       user.setId(data.id);
 
+      setTimeout(() => {
+        toast.success("Вы вошли в аккаунт", TOAST_SUCCESS);
+      }, 10);
+
       navigate(HOME_ROUTE);
     } catch (e) {
-      alert(e.message);
+      toast.error(e.message, TOAST_ERROR);
     }
   };
 
   return (
     <div className="auth-modal">
       <div className="auth-modal__wrapper">
+        <ToastContainers />
         {isLogin ? (
           <h4 className="auth-modal__title">Регистрация</h4>
         ) : (

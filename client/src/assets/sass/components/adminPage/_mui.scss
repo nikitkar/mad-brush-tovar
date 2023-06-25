@@ -53,6 +53,10 @@
             border-color: initial;
             text-decoration-color: initial;
             color: rgba($color-dark_grey, 0.2);
+
+            &_edit {
+              margin-bottom: 4px;
+            }
           }
 
           &-icon {
@@ -162,6 +166,11 @@
           width: auto;
 
           @include font(12px, 400);
+
+          &_checkbox {
+            display: flex;
+            gap: 5px;
+          }
         }
       }
     }

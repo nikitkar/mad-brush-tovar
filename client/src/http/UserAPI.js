@@ -1,4 +1,5 @@
 import { $authHost, $host } from "./Http";
+
 import jwtDecode from "jwt-decode";
 
 export const registration = async (
@@ -19,16 +20,14 @@ export const registration = async (
       address,
     });
 
-    if (data.err) {
-      return alert(data.err);
-    }
+    if (data.err) return { err: "Ошибка, попробуйте ещё раз" };
 
     if (data.token) localStorage.setItem("token", data.token);
     else localStorage.setItem("token", data);
 
     return jwtDecode(data.token ? data.token : data);
   } catch (e) {
-    alert("registration api error - " + e);
+    return "Ошибка регистрации - " + e;
   }
 };
 
@@ -38,9 +37,7 @@ export const login = async (login, password) => {
     password,
   });
 
-  if (data.err) {
-    return alert(data.err);
-  }
+  if (data.err) return { err: "Ошибка, попробуйте ещё раз" };
 
   localStorage.setItem("token", data.token);
 

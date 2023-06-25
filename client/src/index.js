@@ -11,6 +11,7 @@ import PromotionsUsersStore from "./store/PromotionsUsersStore";
 import PointIssueStore from "./store/PointIssueStore";
 import DataTableStore from "./store/DataTableStore";
 import Table_BtnAddingData_VisibleModalStore from "./store/Table_BtnAddingData_VisibleModalStore";
+import EditDataRowStore from "./store/EditDataRowStore";
 
 export const Context = createContext(null);
 
@@ -30,7 +31,8 @@ root.render(
       listPointIssue: new PointIssueStore(),
       dataTables: new DataTableStore(),
       BtnAdding_VisibleModal: new Table_BtnAddingData_VisibleModalStore(),
-      authModal: true,
+      editDataRow: new EditDataRowStore(),
+      authModal: true, // надо узнать что это такое
     }}
   >
     <App />

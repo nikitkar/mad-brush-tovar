@@ -14,15 +14,16 @@ const UserTable = observer(() => {
   useEffect(() => {
     autorun(() => dataTables.refresh());
   }, [dataTables]);
-  
+
   return (
     <>
       <thead className="datagrid-thead">
         <tr className="datagrid-thead-row">
-          <th className="datagrid-thead-cell">
+          <th className="datagrid-thead-cell  datagrid-thead-cell_checkbox">
             <span
               className="datagrid-thead-input-wrap"
-              onClick={() => dataTables.checkedInputAll()}>
+              onClick={() => dataTables.checkedInputAll()}
+            >
               <input className="datagrid-thead-input" type="checkbox" />
 
               {dataTables.dataUser.length === 0 ? (
@@ -33,7 +34,8 @@ const UserTable = observer(() => {
                   focusable="false"
                   aria-hidden="true"
                   viewBox="0 0 24 24"
-                  data-testid="CheckBoxOutlineBlankIcon">
+                  data-testid="CheckBoxOutlineBlankIcon"
+                >
                   <path d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path>
                 </svg>
               ) : dataTables.dataUser.length ===
@@ -45,7 +47,8 @@ const UserTable = observer(() => {
                   focusable="false"
                   aria-hidden="true"
                   viewBox="0 0 24 24"
-                  data-testid="CheckBoxOutlineBlankIcon">
+                  data-testid="CheckBoxOutlineBlankIcon"
+                >
                   <path d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path>
                 </svg>
               ) : (
@@ -54,7 +57,8 @@ const UserTable = observer(() => {
                   focusable="false"
                   aria-hidden="true"
                   viewBox="0 0 24 24"
-                  data-testid="CheckBoxIcon">
+                  data-testid="CheckBoxIcon"
+                >
                   <path d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"></path>
                 </svg>
               )}
@@ -65,7 +69,8 @@ const UserTable = observer(() => {
             <th className="datagrid-thead-cell" key={index}>
               <span
                 className="datagrid-thead-cell-label"
-                onClick={() => dataTables.nameSortColumn(index)}>
+                onClick={() => dataTables.nameSortColumn(index)}
+              >
                 {nameColumn}
                 <span
                   className={
@@ -74,12 +79,14 @@ const UserTable = observer(() => {
                         ? "datagrid-thead-cell_icon  transform"
                         : "datagrid-thead-cell_icon"
                       : "datagrid-thead-cell_icon  transform"
-                  }>
+                  }
+                >
                   <svg
                     focusable="false"
                     aria-hidden="true"
                     viewBox="0 0 24 24"
-                    data-testid="ArrowDownwardIcon">
+                    data-testid="ArrowDownwardIcon"
+                  >
                     <path d="M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z"></path>
                   </svg>
                 </span>

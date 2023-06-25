@@ -18,16 +18,17 @@ export const ALLS_NAMECOLUMNE = {
     "idSale",
     "idClient",
     "idProduct",
-    "numberSale",
     "dataSale",
-    "countProductSale",
-    "countAllSale",
     "priceSale",
+    "countAllSale",
+    "numberSale",
+    "countProductSale",
   ],
   SALESARCHIVE_NAMECOLUMNE: ["idSalesArchive", "idSale", "statusSalesArchive"],
   PRODUCT_NAMECOLUMNE: [
     "idProduct",
     "idCategory",
+    "idSubcategories",
     "nameProduct",
     "priceProduct",
     "imgProduct",
@@ -76,9 +77,10 @@ export const SALE_NAMECOLUMNE = [
   "idClient",
   "idProduct",
   "dataSale",
-  "countSale",
   "priceSale",
+  "countAllSale",
   "numberSale",
+  "countProductSale",
 ];
 export const SALESARCHIVE_NAMECOLUMNE = [
   "idSalesArchive",
@@ -88,9 +90,9 @@ export const SALESARCHIVE_NAMECOLUMNE = [
 export const PRODUCT_NAMECOLUMNE = [
   "idProduct",
   "idCategory",
+  "idSubcategories",
   "nameProduct",
   "priceProduct",
-  "countProduct",
   "imgProduct",
 ];
 export const PRODUCTINFO_NAMECOLUMNE = [

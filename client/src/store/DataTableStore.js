@@ -483,6 +483,36 @@ export default class DataTableStore {
     }
   }
 
+  getNeedArrayForEdingData() {
+    switch (this._activeTable) {
+      case "CLIENT_NAMECOLUMNE":
+        return { table: "CLIENT", data: this._dataUser };
+      case "CREDENTIALS_NAMECOLUMNE":
+        return { table: "CREDENTIALS", data: this._dataCredentials };
+      case "SALE_NAMECOLUMNE":
+        return { table: "SALE", data: this._dataSale };
+      case "SALESARCHIVE_NAMECOLUMNE":
+        return { table: "SALESARCHIVE", data: this._dataSalesArchive };
+      case "PRODUCT_NAMECOLUMNE":
+        return { table: "PRODUCT", data: this._dataProduct };
+      case "PRODUCTINFO_NAMECOLUMNE":
+        return { table: "PRODUCTINFO", data: this._dataProductInfo };
+      case "CATEGORY_NAMECOLUMNE":
+        return { table: "CATEGORY", data: this._dataCategory };
+      case "POINTISSUE_NAMECOLUMNE":
+        return { table: "POINTISSUE", data: this._dataPointIssue };
+      case "SUPPLIERS_NAMECOLUMNE":
+        return { table: "SUPPLIERS", data: this._dataSuppliers };
+      case "INVOICE_NAMECOLUMNE":
+        return { table: "INVOICE", data: this._dataInvoice };
+      case "PRODUCTWAYBILL_NAMECOLUMNE":
+        return { table: "PRODUCTWAYBILL", data: this._dataProductWaybill };
+
+      default:
+        return null;
+    }
+  }
+
   setDataUser(data) {
     this._dataUser = data;
   }

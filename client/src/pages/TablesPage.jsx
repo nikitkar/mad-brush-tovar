@@ -8,9 +8,10 @@ import RenderTables from "../components/table/function/RenderTables";
 import RenderSelectOption from "../components/table/function/RenderSelectOption";
 import { BtnAddingData } from "../components/table/function/BtnAddingData";
 import { RenderModalAdd } from "../components/table/function/RenderModalAdd";
+import { EditModalRow } from "../components/table/function/EditModalRow";
 
 const TablesPage = observer(({ nameTable }) => {
-  const { dataTables } = useContext(Context);
+  const { dataTables, editDataRow } = useContext(Context);
 
   const nameTabel_split = nameTable.split("_")[0].toLowerCase();
   const [state, setState] = useState(false);
@@ -31,21 +32,23 @@ const TablesPage = observer(({ nameTable }) => {
         {nameTable === "" ? null : (
           <>
             {dataTables.selectedInputs.length === 0 ? null : (
-              <div className="mui-toolbar-delete-wrap">
-                <p className="mui-toolbar-delete-text">
-                  Элементов выделено -{" "}
-                  <span>{dataTables.selectedInputs.length}</span>
-                </p>
-                <button className="btn-text" onClick={open}>
-                  Удалить
-                </button>
-                <Confirm
-                  content="Уверены, что хотите удалить?"
-                  open={state}
-                  onCancel={close}
-                  onConfirm={deleteRow}
-                />
-              </div>
+              <>
+                <div className="mui-toolbar-delete-wrap">
+                  <p className="mui-toolbar-delete-text">
+                    Элементов выделено -{" "}
+                    <span>{dataTables.selectedInputs.length}</span>
+                  </p>
+                  <button className="btn-text" onClick={open}>
+                    Удалить
+                  </button>
+                  <Confirm
+                    content="Уверены, что хотите удалить?"
+                    open={state}
+                    onCancel={close}
+                    onConfirm={deleteRow}
+                  />
+                </div>
+              </>
             )}
 
             <BtnAddingData nameTabel_split={nameTabel_split} />
@@ -76,6 +79,7 @@ const TablesPage = observer(({ nameTable }) => {
         </div>
 
         <RenderModalAdd />
+        <EditModalRow stateModal={editDataRow.visibleModal} />
       </div>
     </div>
   );

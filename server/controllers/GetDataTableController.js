@@ -53,6 +53,40 @@ class GetDataTableController {
     }
   }
 
+  async editRow(req, res, next) {
+    try {
+      const { nameTable, arrDataContent, objIdValue } = req.query;
+
+      if (
+        !nameTable ||
+        nameTable == "" ||
+        !arrDataContent ||
+        arrDataContent == "" ||
+        !objIdValue ||
+        objIdValue == ""
+      )
+        return next(
+          ApiError.badRequest(
+            "Incorrect nameTable or arrDataContent or objIdValue"
+          )
+        );
+
+      let query = "";
+
+      if (nameTable.toLowerCase() === "client") {
+        query = `UPDATE ${nameTable}, promotionsUsers SET ${arrDataContent} WHERE client.${objIdValue} AND promotionsUsers.${objIdValue};`;
+      } else
+        query = `UPDATE ${nameTable} SET ${arrDataContent} WHERE ${objIdValue};`;
+
+      await db.query(query, (err, data) => {
+        if (err) return res.json({ err: err });
+        else return res.json({ message: "Запись изменена" });
+      });
+    } catch (e) {
+      next(ApiError.badRequest(e.message));
+    }
+  }
+
   async searchData(req, res, next) {
     const { nameTable, nameColumn, content } = req.query;
 
